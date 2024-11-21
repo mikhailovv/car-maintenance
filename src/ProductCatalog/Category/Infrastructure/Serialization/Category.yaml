@@ -1,0 +1,19 @@
+App\ProductCatalog\Category\Domain\Entity\Category:
+  attributes:
+    id:
+      groups: ['category_read']
+    name:
+      groups: ['category_read', 'category_write']
+    createdAt:
+      groups: ['category_read']
+      serialize_as: 'datetime'
+    updatedAt:
+      groups: ['category_read']
+      serialize_as: 'datetime'
+    parentCategory:
+      groups: ['category_write']
+      max_depth: 1
+    parentCategoryId:
+      groups: ['category_read']
+      serialized_name: 'parent_category_id'
+      getter: getParentCategoryId
