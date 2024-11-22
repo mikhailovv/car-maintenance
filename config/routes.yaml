@@ -1,5 +1,11 @@
-controllers:
+CategoryControllers:
     resource:
-        path: ../src/ProductCatalog/Category/Application/Controller/
-        namespace: App\ProductCatalog\Category\Application\Controller
+      path: ../src/ProductCatalog/Category/Application/Controller/
+      namespace: App\ProductCatalog\Category\Application\Controller
+    type: attribute
+
+UserControllers:
+    resource:
+        path: ../src/Authorization/User/Application/Controller/
+        namespace: App\Authorization\User\Application\Controller
     type: attribute

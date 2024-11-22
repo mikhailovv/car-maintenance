@@ -1,0 +1,30 @@
+security:
+  providers:
+    users:
+      entity:
+        class: App\Authorization\User\Domain\Entity\User
+        property: email
+  password_hashers:
+    App\Authorization\User\Domain\Entity\User:
+      algorithm: auto
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+
+    api:
+      pattern: ^/api
+      stateless: true
+      json_login:
+        check_path: /api/login   # Ensure this matches the route path
+        username_path: email     # Use "email" instead of "username" if applicable
+        password_path: password
+        success_handler: App\Authorization\User\Application\Service\LoginSuccessHandler
+
+      access_token:
+        token_handler: App\Authorization\User\Application\Service\AccessTokenHandler
+
+  access_control:
+    - { path: ^/api/login, roles: PUBLIC_ACCESS }
+    - { path: ^/api/register, roles: PUBLIC_ACCESS }
+    - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }

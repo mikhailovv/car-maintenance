@@ -24,3 +24,10 @@ services:
         arguments:
             $normalizers:
                 - '@serializer.normalizer.object'
+
+    App\ProductCatalog\Category\Infrastructure\Repository\CategoryRepository:
+        tags: ['doctrine.repository_service']
+
+    App\Authorization\User\Infrastructure\Repository\UserRepository:
+        tags: ['doctrine.repository_service']
+
