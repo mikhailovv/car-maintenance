@@ -19,7 +19,7 @@ class AuthTokenFactory
     {
         $userIdentifier = $user->getUserIdentifier();
         $issuedAt = Carbon::now();
-        $expiredAt = (Carbon::now())->addHour();
+        $expiredAt = (Carbon::now())->addDay();
 
         $jwtTokenData = new JwtTokenData(
             $userIdentifier,

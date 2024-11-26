@@ -2,11 +2,9 @@
 
 namespace App\Authorization\User\Application\Service;
 
-use App\Authorization\User\Domain\Entity\AuthToken;
 use App\Authorization\User\Domain\Entity\User;
 use App\Authorization\User\Domain\Repository\TokenRepositoryInterface;
 use App\Authorization\User\Infrastructure\Security\AuthTokenFactory;
-use App\Authorization\User\Infrastructure\Security\TokenGenerator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

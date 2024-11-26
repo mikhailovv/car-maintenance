@@ -14,6 +14,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private DateTimeImmutable $registeredAt;
     private DateTimeImmutable $updatedAt;
 
+    private $cars;
+
     public function __construct(string $id, string $email, ?string $password=null)
     {
         $this->id = $id;
@@ -62,5 +64,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getCars(){
+        return $this->cars;
+    }
+
+    public function setCars($cars){
+        $this->cars = $cars;
     }
 }

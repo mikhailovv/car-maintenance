@@ -18,12 +18,18 @@ doctrine:
             Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
         auto_mapping: true
         mappings:
-            App\ProductCatalog:
+            App\ProductCatalog\Category:
                 type: xml
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/ProductCatalog/Category/Infrastructure/DoctrineMapping'
                 prefix: 'App\ProductCatalog\Category\Domain\Entity'
                 alias: Category
+            App\ProductCatalog\Car:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/ProductCatalog/Car/Infrastructure/DoctrineMapping'
+                prefix: 'App\ProductCatalog\Car\Domain\Entity'
+                alias: Brand
             App\Authorization:
                 type: xml
                 is_bundle: false

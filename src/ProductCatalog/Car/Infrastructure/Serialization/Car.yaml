@@ -1,0 +1,22 @@
+App\ProductCatalog\Car\Domain\Entity\Car:
+  attributes:
+    id:
+      groups: ['car_read']
+      type: integer
+    name:
+      groups: ['car_read']
+    brand:
+      groups: ['car_read']
+    model:
+      groups: ['car_read']
+    year:
+      groups: ['car_read']
+      type: integer
+    color:
+      groups: ['car_read']
+    registrationNumber:
+      groups: ['car_read']
+    vin:
+      groups: ['car_read']
+
+

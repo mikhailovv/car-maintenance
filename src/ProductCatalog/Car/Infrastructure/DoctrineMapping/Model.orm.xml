@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <entity name="App\ProductCatalog\Car\Domain\Entity\Model"
+            table="models"
+            repository-class="App\ProductCatalog\Car\Infrastructure\Repository\ModelRepository"
+            >
+        <id name="id" type="integer" column="id" length="36">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="name" column="name" length="255" />
+        <field name="brandSlug" column="brand_slug" length="255" />
+        <field name="weight" column="weight" type="integer" />
+
+        <indexes>
+            <index name="idx_brand_slug" columns="brand_slug" />
+        </indexes>
+
+    </entity>
+</doctrine-mapping>

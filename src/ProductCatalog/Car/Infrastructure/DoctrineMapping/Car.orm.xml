@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <entity name="App\ProductCatalog\Car\Domain\Entity\Car"
+            table="cars"
+            repository-class="App\ProductCatalog\Car\Infrastructure\Repository\CarRepository"
+            >
+        <id name="id" type="guid" column="id" length="36">
+            <generator strategy="NONE" />
+        </id>
+        <field name="name" column="name" length="255" />
+        <field name="brand" column="brand" length="255" />
+        <field name="model" column="model" length="255" />
+        <field name="year" column="year"  />
+        <field name="color" column="color" length="255" />
+        <field name="registrationNumber" column="registration_number" length="255" />
+        <field name="vin" column="vin" length="255" />
+
+        <field name="createdAt" column="created_at" type="datetime_immutable" />
+        <field name="updatedAt" column="updated_at" type="datetime_immutable" />
+
+        <many-to-one field="user" target-entity="App\Authorization\User\Domain\Entity\User" fetch="LAZY">
+            <join-column name="user_id" referenced-column-name="id" nullable="false" />
+        </many-to-one>
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="prePersist" />
+            <lifecycle-callback type="preUpdate" method="preUpdate" />
+        </lifecycle-callbacks>
+    </entity>
+</doctrine-mapping>

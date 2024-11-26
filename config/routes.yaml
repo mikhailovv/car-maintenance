@@ -9,3 +9,15 @@ UserControllers:
         path: ../src/Authorization/User/Application/Controller/
         namespace: App\Authorization\User\Application\Controller
     type: attribute
+
+CarControllers:
+  resource:
+    path: ../src/ProductCatalog/Car/Application/Controller/
+    namespace: App\ProductCatalog\Car\Application\Controller
+  type: attribute
+
+ApplicationControllers:
+  resource:
+    path: ../src/Application/Health/Application/Controller
+    namespace:  App\Application\Health\Application\Controller
+  type: attribute

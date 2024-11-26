@@ -1,0 +1,7 @@
+App\ProductCatalog\Car\Domain\Entity\Model:
+  attributes:
+    id:
+      groups: ['brand_read']
+      type: integer
+    name:
+      groups: ['brand_read']
