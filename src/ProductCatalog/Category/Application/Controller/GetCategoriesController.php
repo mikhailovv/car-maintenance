@@ -9,7 +9,7 @@ use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/api/categories/', name: 'api_categories_get', methods: ['GET'])]
+#[Route('/api/parts/categories/', name: 'api_categories_get', methods: ['GET'])]
 final class GetCategoriesController extends AbstractController
 {
     use HandleTrait;

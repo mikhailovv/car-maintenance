@@ -4,6 +4,7 @@ FROM php:8.3-fpm
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     libicu-dev \
+    libpq-dev \
     libonig-dev \
     libzip-dev \
     unzip \
@@ -11,8 +12,12 @@ RUN apt-get update && apt-get install -y \
     curl
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql intl zip opcache
-
+RUN docker-php-ext-install \
+    pdo \
+    pdo_pgsql \
+    intl \
+    zip \
+    opcache
 # Install Composer
 COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
 
