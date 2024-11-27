@@ -5,14 +5,12 @@ namespace App\ProductCatalog\Category\Domain\Entity;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Ramsey\Uuid\Uuid;
 
 class Category
 {
-    private string $id;
+    private int $id;
     private string $name;
-
-    private string $parentCategoryId;
+    private int $parentCategoryId;
     private ?Category $parentCategory;
     private Collection $subCategories;
     private DateTimeImmutable $createdAt;
@@ -43,10 +41,6 @@ class Category
 
     public function prePersist(): void
     {
-        if (empty($this->id)) {
-            $this->id = Uuid::uuid7()->toString();
-        }
-
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
     }

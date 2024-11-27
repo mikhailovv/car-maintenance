@@ -14,14 +14,14 @@
         <field name="color" column="color" length="255" />
         <field name="registrationNumber" column="registration_number" length="255" />
         <field name="vin" column="vin" length="255" />
+        <field name="userId" column="user_id" length="36" />
 
         <field name="createdAt" column="created_at" type="datetime_immutable" />
         <field name="updatedAt" column="updated_at" type="datetime_immutable" />
 
-        <many-to-one field="user" target-entity="App\Authorization\User\Domain\Entity\User" fetch="LAZY">
-            <join-column name="user_id" referenced-column-name="id" nullable="false" />
+        <many-to-one field="user" inversed-by="cars" >
+            <join-column nullable="false"/>
         </many-to-one>
-
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="prePersist" />
             <lifecycle-callback type="preUpdate" method="preUpdate" />

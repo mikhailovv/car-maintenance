@@ -12,7 +12,9 @@
         <field name="password" column="password" length="255"/>
         <field name="registeredAt" column="registered_at" type="datetime_immutable" />
         <field name="updatedAt" column="updated_at" type="datetime_immutable" />
-        <one-to-many field="cars" target-entity="App\ProductCatalog\Car\Domain\Entity\Car" mapped-by="userId" />
+
+        <one-to-many field="cars" target-entity="App\ProductCatalog\Car\Domain\Entity\Car" mapped-by="user" />
+
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="prePersist" />
             <lifecycle-callback type="preUpdate" method="preUpdate" />

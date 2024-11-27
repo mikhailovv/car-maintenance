@@ -2,7 +2,10 @@
 
 namespace App\Authorization\User\Domain\Entity;
 
+use App\ProductCatalog\Car\Domain\Entity\Car;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -14,7 +17,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private DateTimeImmutable $registeredAt;
     private DateTimeImmutable $updatedAt;
 
-    private $cars;
+    private Collection $cars;
 
     public function __construct(string $id, string $email, ?string $password=null)
     {
@@ -23,6 +26,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($password !== null) {
             $this->password = $password;
         }
+        $this->cars = new ArrayCollection();
     }
 
     public function prePersist(): void
@@ -70,7 +74,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->cars;
     }
 
-    public function setCars($cars){
-        $this->cars = $cars;
+    public function addCar(Car $car): self
+    {
+        if (!$this->cars->contains($car)) {
+            $this->cars[] = $car;
+            $car->setUser($this); // Ensure the owning side is updated
+        }
+
+        return $this;
     }
+
 }
