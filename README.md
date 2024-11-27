@@ -26,6 +26,17 @@ Use
 
 as login/password 
 
+### Stop application
+Run "make down" in root directory
+```shell
+make down
+```
+### Clear docker
+Run "make prune" in root directory
+```shell
+make prune
+```
+
 ### Routes
 
 #### Login
