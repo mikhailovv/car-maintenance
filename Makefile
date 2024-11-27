@@ -13,6 +13,7 @@ composer-install:
 	docker-compose exec php composer install
 
 create-fixtures:
+	docker-compose exec php /var/www/html/bin/console doctrine:migration:migrate
 	docker-compose exec php /var/www/html/bin/console doctrine:fixtures:load
 
 information:
