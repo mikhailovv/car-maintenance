@@ -5,10 +5,9 @@ Content-Type: application/json
 ####
 ####
 
-GET http://localhost:8000/api/categories/
+GET http://localhost:8000/api/parts/categories/
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3MzIzNTYwODQsImV4cCI6MTczMjM1OTY4NH0.87aRQeJ2O5V_1QOc_axp2it9oHZo-x3TYyvWk1lVw6Y
-
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3MzI3MDUwMTYsImV4cCI6MTczMjc5MTQxNn0.k70_F82JNHV7lI69mocDphyuwdqQoT_auavWrsk8zik
 
 ####
 GET http://localhost:8000/api/cars/brands
