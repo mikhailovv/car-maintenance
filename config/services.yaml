@@ -31,6 +31,3 @@ services:
     App\Authorization\User\Infrastructure\Repository\UserRepository:
         tags: ['doctrine.repository_service']
 
-    App\Application\Error\Infrastructure\EventListener\JsonExceptionListener:
-        tags:
-            - { name: 'kernel.event_listener', event: 'kernel.exception' }

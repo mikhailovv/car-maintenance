@@ -18,8 +18,14 @@ RUN docker-php-ext-install \
     intl \
     zip \
     opcache
+
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+COPY xdebug.ini "${PHP_INI_DIR}/conf.d"
 # Install Composer
 COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
+
 
 # Set working directory
 WORKDIR /var/www/html

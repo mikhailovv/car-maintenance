@@ -8,6 +8,9 @@ up:
 down:
 	docker-compose down
 
+restart:
+	 docker compose down && docker compose build && docker compose up -d
+
 # Run composer install in the PHP container
 composer-install:
 	docker-compose exec php composer install

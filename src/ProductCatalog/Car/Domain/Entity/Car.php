@@ -31,6 +31,22 @@ class Car
         $this->userId = $user->getId();
     }
 
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function getUpdatedAt(): DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+
     public function prePersist(): void
     {
         if (empty($this->id)){

@@ -6,6 +6,7 @@ use App\Authorization\User\Domain\Entity\User;
 use App\Authorization\User\Domain\Repository\UserRepositoryInterface;
 use App\ProductCatalog\Car\Application\Model\GetCarsQuery;
 use App\ProductCatalog\Car\Domain\Entity\Car;
+use App\ProductCatalog\Car\Domain\Repository\CarRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Messenger\HandleTrait;
@@ -17,18 +18,14 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
 class GetCarsController extends AbstractController
 {
     use HandleTrait;
-    public function __construct(private MessageBusInterface $messageBus, private UserRepositoryInterface $userRepository)
+    public function __construct(private MessageBusInterface $messageBus, private UserRepositoryInterface $userRepository, private CarRepositoryInterface $carRepository)
     {
     }
 
-    public function __invoke(#[CurrentUser] User $user): JsonResponse
+    public function __invoke(): JsonResponse
     {
-        $data = $user->getCars()->map(
-            fn (Car $car) => ['user_id' => $car->getUser()->getId(), 'car_id' => $car->getId()]);
-        return new JsonResponse($data);
-
-        $cars = $this->handle(new GetCarsQuery($user->getId()));
-
+        $cars = [];// $this->handle(new GetCarsQuery($user->getId()));
+        $cars = $this->carRepository->findAll();
         return JsonResponse::fromJsonString($cars);
     }
 }
