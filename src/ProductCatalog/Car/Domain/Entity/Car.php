@@ -3,6 +3,7 @@
 namespace App\ProductCatalog\Car\Domain\Entity;
 
 use App\Authorization\User\Domain\Entity\User;
+use Carbon\Carbon;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 
@@ -12,7 +13,7 @@ class Car
     private string $name;
     private string $brand;
     private string $model;
-    private int $year;
+    private DateTimeImmutable $producedAt;
     private string $color;
     private string $registrationNumber;
     private string $vin;
@@ -21,12 +22,11 @@ class Car
     private DateTimeImmutable $createdAt;
     private DateTimeImmutable $updatedAt;
 
-    public function __construct(string $name, string $brand, string $model, int $year, User $user)
+    public function __construct(string $name, string $brand, string $model, User $user)
     {
         $this->name = $name;
         $this->brand = $brand;
         $this->model = $model;
-        $this->year = $year;
         $this->user = $user;
         $this->userId = $user->getId();
     }
@@ -91,14 +91,14 @@ class Car
         $this->model = $model;
     }
 
-    public function getYear(): int
+    public function getProducedAt(): DateTimeImmutable
     {
-        return $this->year;
+        return $this->producedAt;
     }
 
-    public function setYear(int $year): void
+    public function setProducedAt(DateTimeImmutable $producedAt): void
     {
-        $this->year = $year;
+        $this->producedAt = $producedAt;
     }
 
     public function getColor(): string

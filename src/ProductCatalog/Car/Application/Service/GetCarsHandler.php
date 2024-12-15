@@ -16,7 +16,7 @@ class GetCarsHandler
     ){}
     public function __invoke(GetCarsQuery $query): string
     {
-        $cars = $this->carRepository->findAll();
+        $cars = $this->carRepository->findBy(['userId' => $query->getUserId()]);
 
         return $this->serializer->serialize(
             $cars,

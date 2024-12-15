@@ -34,14 +34,18 @@ Content-Type: application/json
 GET http://localhost:8000/api/cars
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
+
 ####
-POST http://localhost:8000/api/products
+POST http://localhost:8000/api/cars
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "category_id": "uuidv7",
-  "name": "TRW 34243",
-  "part_number": "111212121212",
-  "car_id": "uuid"
+  "name": "my car",
+  "brand": "bmw",
+  "model": "3-series",
+  "vin": "vin number",
+  "color": "color",
+  "registrationNumber": "320 AAB",
+  "producedAt": "19.04.2023"
 }

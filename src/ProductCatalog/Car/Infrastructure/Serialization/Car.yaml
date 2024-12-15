@@ -11,7 +11,6 @@ App\ProductCatalog\Car\Domain\Entity\Car:
       groups: ['car_read']
     year:
       groups: ['car_read']
-      type: integer
     color:
       groups: ['car_read']
     registrationNumber:

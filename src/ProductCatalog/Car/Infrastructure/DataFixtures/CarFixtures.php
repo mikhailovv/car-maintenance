@@ -3,8 +3,9 @@
 namespace App\ProductCatalog\Car\Infrastructure\DataFixtures;
 
 use App\Authorization\User\Domain\Entity\User;
-use App\ProductCatalog\Car\Domain\Entity\Brand;
 use App\ProductCatalog\Car\Domain\Entity\Car;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Ramsey\Uuid\Uuid;
@@ -22,17 +23,19 @@ class CarFixtures  extends Fixture
         $bmwOwner = new User(Uuid::uuid7()->toString(), 'bmw-owner@admin.com', $this->passwordHasher->hashPassword(new User('1', 'test@test.com'),  'bmw-owner'));
         $manager->persist($bmwOwner);
 
-        $compact = new Car('My 325ti compact', 'BMW', '3-series', 2001, $bmwOwner);
+        $compact = new Car('My 325ti compact', 'BMW', '3-series', $bmwOwner);
         $compact->setVin('12345767812');
         $compact->setColor('red');
+        $compact->setProducedAt(new CarbonImmutable('2001-10-30'));
         $compact->setRegistrationNumber('219 GJE');
 
         $manager->persist($compact);
 
 
-        $touring = new Car('My 318 Touring', 'BMW', '3-series', 2022, $bmwOwner);
+        $touring = new Car('My 318 Touring', 'BMW', '3-series', $bmwOwner);
         $touring->setVin('67812123457');
         $touring->setColor('red');
+        $touring->setProducedAt(new CarbonImmutable('2022-05-10'));
         $touring->setRegistrationNumber('322 MJA');
 
         $manager->persist($touring);
@@ -41,7 +44,7 @@ class CarFixtures  extends Fixture
         $mbOwner = new User(Uuid::uuid7()->toString(), 'mercedes-owner@admin.com', $this->passwordHasher->hashPassword(new User('1', 'test@test.com'),  'mercedes-owner'));
         $manager->persist($mbOwner);
 
-        $vito = new Car('Vito', 'Mercedes-Benz', 'Vito', 2018, $mbOwner);
+        $vito = new Car('Vito', 'Mercedes-Benz', 'Vito', $mbOwner);
         $vito->setVin('3456789');
         $vito->setColor('black');
         $vito->setRegistrationNumber('345 VIP');

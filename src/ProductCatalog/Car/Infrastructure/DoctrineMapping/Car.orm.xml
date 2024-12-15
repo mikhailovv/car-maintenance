@@ -10,7 +10,7 @@
         <field name="name" column="name" length="255" />
         <field name="brand" column="brand" length="255" />
         <field name="model" column="model" length="255" />
-        <field name="year" column="year"  />
+        <field name="producedAt" column="produced_at" type="datetime_immutable" />
         <field name="color" column="color" length="255" />
         <field name="registrationNumber" column="registration_number" length="255" />
         <field name="vin" column="vin" length="255" />
