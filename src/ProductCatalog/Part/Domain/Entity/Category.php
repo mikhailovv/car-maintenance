@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ProductCatalog\Category\Domain\Entity;
+namespace App\ProductCatalog\Part\Domain\Entity;
 
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;

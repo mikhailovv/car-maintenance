@@ -1,9 +1,9 @@
 <?php
 
-namespace App\ProductCatalog\Category\Infrastructure\Repository;
+namespace App\ProductCatalog\Part\Infrastructure\Repository;
 
-use App\ProductCatalog\Category\Domain\Entity\Category;
-use App\ProductCatalog\Category\Domain\Repository\CategoryRepositoryInterface;
+use App\ProductCatalog\Part\Domain\Entity\Category;
+use App\ProductCatalog\Part\Domain\Repository\CategoryRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

@@ -20,12 +20,12 @@ services:
             - '../src/ProductCatalog/CategoryFixtures/Domain/Entity'
             - '../src/Kernel.php'
 
-    Symfony\Component\Serializer\Serializer:
-        arguments:
-            $normalizers:
-                - '@serializer.normalizer.object'
+    date_time_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
+        arguments: [ { datetime_format: "Y-m-d H:i:s" } ]
+        tags: [ serializer.normalizer ]
 
-    App\ProductCatalog\Category\Infrastructure\Repository\CategoryRepository:
+    App\ProductCatalog\Part\Infrastructure\Repository\CategoryRepository:
         tags: ['doctrine.repository_service']
 
     App\Authorization\User\Infrastructure\Repository\UserRepository:

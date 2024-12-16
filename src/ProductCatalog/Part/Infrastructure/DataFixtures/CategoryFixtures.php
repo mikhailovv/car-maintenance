@@ -1,8 +1,8 @@
 <?php
 
-namespace App\ProductCatalog\Category\Infrastructure\DataFixtures;
+namespace App\ProductCatalog\Part\Infrastructure\DataFixtures;
 
-use App\ProductCatalog\Category\Domain\Entity\Category;
+use App\ProductCatalog\Part\Domain\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

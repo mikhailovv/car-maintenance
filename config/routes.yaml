@@ -1,7 +1,7 @@
 CategoryControllers:
     resource:
-      path: ../src/ProductCatalog/Category/Application/Controller/
-      namespace: App\ProductCatalog\Category\Application\Controller
+      path: ../src/ProductCatalog/Part/Application/Controller/
+      namespace: App\ProductCatalog\Part\Application\Controller
     type: attribute
 
 UserControllers:

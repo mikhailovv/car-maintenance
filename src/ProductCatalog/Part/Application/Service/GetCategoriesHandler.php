@@ -1,9 +1,9 @@
 <?php
 
-namespace App\ProductCatalog\Category\Application\Service;
+namespace App\ProductCatalog\Part\Application\Service;
 
-use App\ProductCatalog\Category\Application\Model\GetCategoriesQuery;
-use App\ProductCatalog\Category\Domain\Repository\CategoryRepositoryInterface;
+use App\ProductCatalog\Part\Application\Model\GetCategoriesQuery;
+use App\ProductCatalog\Part\Domain\Repository\CategoryRepositoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Serializer\SerializerInterface;
 

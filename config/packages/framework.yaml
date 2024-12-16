@@ -19,7 +19,7 @@ framework:
         enabled: true
         mapping:
             paths:
-                - '%kernel.project_dir%/src/ProductCatalog/Category/Infrastructure/Serialization'
+                - '%kernel.project_dir%/src/ProductCatalog/Part/Infrastructure/Serialization'
                 - '%kernel.project_dir%/src/ProductCatalog/Car/Infrastructure/Serialization'
 when@test:
     framework:

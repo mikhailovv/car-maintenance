@@ -1,8 +1,8 @@
 <?php
 
-namespace App\ProductCatalog\Category\Domain\Repository;
+namespace App\ProductCatalog\Part\Domain\Repository;
 
-use App\ProductCatalog\Category\Domain\Entity\Category;
+use App\ProductCatalog\Part\Domain\Entity\Category;
 use Doctrine\DBAL\LockMode;
 
 interface CategoryRepositoryInterface

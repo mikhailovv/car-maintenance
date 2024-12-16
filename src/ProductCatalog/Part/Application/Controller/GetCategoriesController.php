@@ -1,8 +1,8 @@
 <?php
 
-namespace App\ProductCatalog\Category\Application\Controller;
+namespace App\ProductCatalog\Part\Application\Controller;
 
-use App\ProductCatalog\Category\Application\Model\GetCategoriesQuery;
+use App\ProductCatalog\Part\Application\Model\GetCategoriesQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Messenger\HandleTrait;

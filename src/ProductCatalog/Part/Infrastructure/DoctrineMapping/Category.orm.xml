@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
     <entity
-        name="App\ProductCatalog\Category\Domain\Entity\Category"
+        name="App\ProductCatalog\Part\Domain\Entity\Category"
         table="categories"
-        repository-class="App\ProductCatalog\Category\Infrastructure\Repository\CategoryRepository"
+        repository-class="App\ProductCatalog\Part\Infrastructure\Repository\CategoryRepository"
     >
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
@@ -12,10 +12,10 @@
         <field name="createdAt" column="created_at" type="datetime_immutable" />
         <field name="updatedAt" column="updated_at" type="datetime_immutable" />
         <field name="parentCategoryId" column="parent_category_id" type="integer" />
-        <many-to-one field="parentCategory" target-entity="App\ProductCatalog\Category\Domain\Entity\Category" inversed-by="subCategories">
+        <many-to-one field="parentCategory" target-entity="App\ProductCatalog\Part\Domain\Entity\Category" inversed-by="subCategories">
             <join-column name="parent_category_id" referenced-column-name="id" nullable="true"/>
         </many-to-one>
-        <one-to-many field="subCategories" target-entity="App\ProductCatalog\Category\Domain\Entity\Category" mapped-by="parentCategory">
+        <one-to-many field="subCategories" target-entity="App\ProductCatalog\Part\Domain\Entity\Category" mapped-by="parentCategory">
             <order-by>
                 <order-by-field name="name" direction="ASC"></order-by-field>
             </order-by>

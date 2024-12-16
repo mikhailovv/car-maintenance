@@ -9,7 +9,7 @@ App\ProductCatalog\Car\Domain\Entity\Car:
       groups: ['car_read']
     model:
       groups: ['car_read']
-    year:
+    producedAt:
       groups: ['car_read']
     color:
       groups: ['car_read']

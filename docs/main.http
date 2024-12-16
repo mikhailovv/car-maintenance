@@ -49,3 +49,32 @@ Authorization: Bearer {{auth_token}}
   "registrationNumber": "320 AAB",
   "producedAt": "19.04.2023"
 }
+
+###
+GET http://localhost:8000/api/parts
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+###
+POST http://localhost:8000/api/parts
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "category_id": 99,
+  "brand": "TRW",
+  "part_number": "322323",
+  "original_part_number": "5555",
+  "name": "new part"
+}
+
+###
+POST http://localhost:8000/api/parts/{uuid}/purchase
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "quantity": 4,
+  "unit_price": 23.34,
+  "shop": "shop name"
+}

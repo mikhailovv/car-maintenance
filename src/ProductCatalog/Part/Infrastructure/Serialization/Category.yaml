@@ -1,4 +1,4 @@
-App\ProductCatalog\Category\Domain\Entity\Category:
+App\ProductCatalog\Part\Domain\Entity\Category:
   attributes:
     id:
       groups: ['category_read']
