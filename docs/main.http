@@ -69,12 +69,50 @@ Authorization: Bearer {{auth_token}}
 }
 
 ###
-POST http://localhost:8000/api/parts/{uuid}/purchase
+POST http://localhost:8000/api/purchase
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
+  "item_id": "0193da41-2b6c-72b5-a567-d40c887d89e6",
+  "item_type": "part",
   "quantity": 4,
   "unit_price": 23.34,
-  "shop": "shop name"
+  "currency": "EUR"
 }
+######
+
+######
+Purchase
+    id
+    item_type
+    item_id
+    quantity
+    unit_price
+    shop
+    created_at
+
+// purchases
+// 3 | part | TRW Brake pads | 15 | 20.0 | 12.12.2024
+// 4 | part |q TEXTAR Brakes  | 20 | 10.0 | 21.11.2023
+
+// inventory
+// | TRW Brake pads | 15
+// | TEXTAR Brakes  | 20
+
+// purchases
+// 5 | TRW Brake pads | 10 | 20.0 | 12.12.2024
+
+// inventory
+// | TRW Brake pads | 25
+// | TEXTAR Brakes  | 20
+
+// create service
+// id:10 | Brake service | 1 | 150.0 | 12.12.2023
+// service parts
+// service_id: 10 | TRW Brake pads | 1
+// service_id: 10 | TRW Brake lube | 1
+
+// inventory
+// | TRW Brake pads | 24
+// | TEXTAR Brakes  | 20

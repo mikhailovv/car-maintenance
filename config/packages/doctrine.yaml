@@ -2,6 +2,9 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
 
+        types:
+            purchase_type_enum: App\ProductCatalog\Purchase\Infrastructure\Doctrine\Type\PurchaseTypeEnumType
+
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '16'
@@ -29,13 +32,24 @@ doctrine:
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/ProductCatalog/Car/Infrastructure/DoctrineMapping'
                 prefix: 'App\ProductCatalog\Car\Domain\Entity'
-                alias: Brand
+                alias: Car
             App\Authorization:
                 type: xml
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Authorization/User/Infrastructure/DoctrineMapping'
                 prefix: 'App\Authorization\User\Domain\Entity'
                 alias: User
+            App\ProductCatalog\Purchase:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/ProductCatalog/Purchase/Infrastructure/DoctrineMapping'
+                prefix: 'App\ProductCatalog\Purchase\Domain\Entity'
+                alias: Purchase
+            config:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/config/doctrine/Money'
+                prefix: 'Money'
         controller_resolver:
             auto_mapping: false
 

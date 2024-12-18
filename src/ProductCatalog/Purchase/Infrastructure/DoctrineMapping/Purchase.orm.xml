@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                   https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\ProductCatalog\Purchase\Domain\Entity\Purchase" table="purchases">
+        <id name="id" type="guid" column="id" length="36">
+            <generator strategy="NONE" />
+        </id>
+
+<!--        <field name="purchaseType" type="purchase_type_enum" nullable="false" column="purchase_type" />-->
+        <field name="quantity" type="float" nullable="false" />
+        <embedded name="unitPrice" class="Money\Money" column-prefix="unit_price_" />
+        <embedded name="totalPrice" class="Money\Money" column-prefix="total_price_" />
+    </entity>
+</doctrine-mapping>

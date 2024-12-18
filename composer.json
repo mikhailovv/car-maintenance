@@ -12,6 +12,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.3",
         "firebase/php-jwt": "*",
+        "moneyphp/money": "^4.6",
         "nesbot/carbon": "*",
         "ramsey/uuid": "*",
         "symfony/console": "7.1.*",

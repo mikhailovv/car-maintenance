@@ -17,7 +17,8 @@ RUN docker-php-ext-install \
     pdo_pgsql \
     intl \
     zip \
-    opcache
+    opcache \
+    bcmath
 
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug

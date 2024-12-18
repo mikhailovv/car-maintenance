@@ -36,4 +36,16 @@ class PartRepository extends ServiceEntityRepository implements PartRepositoryIn
             ->getQuery()
             ->getResult();
     }
+
+    public function findByIdAndUser(string $id, string $userId): ?Part
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->orWhere('p.user is null')
+            ->setParameter('user', $userId)
+            ->andWhere('p.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
