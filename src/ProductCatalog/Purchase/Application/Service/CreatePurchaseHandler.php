@@ -4,11 +4,13 @@ namespace App\ProductCatalog\Purchase\Application\Service;
 
 use App\ProductCatalog\Part\Domain\Repository\PartRepositoryInterface;
 use App\ProductCatalog\Purchase\Application\Model\CreatePurchaseCommand;
+use App\ProductCatalog\Purchase\Application\Model\IncreaseInventoryCommand;
 use App\ProductCatalog\Purchase\Domain\Entity\Purchase;
 use App\ProductCatalog\Purchase\Domain\Entity\PurchaseType;
 use App\ProductCatalog\Purchase\Domain\Repository\PurchaseRepositoryInterface;
 use InvalidArgumentException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 #[asMessageHandler]
@@ -17,14 +19,15 @@ class CreatePurchaseHandler
     public function __construct(
         private PurchaseRepositoryInterface $purchaseRepository,
         private PartRepositoryInterface     $partRepository,
-        private SerializerInterface         $serializer
+        private SerializerInterface         $serializer,
+        private MessageBusInterface         $messageBus
     )
     {
     }
 
     public function __invoke(CreatePurchaseCommand $command): string
     {
-        switch ($command->getItemPurchaseType()){
+        switch ($command->getItemPurchaseType()) {
             case PurchaseType::OIL:
                 break;
             case PurchaseType::PART:
@@ -34,7 +37,7 @@ class CreatePurchaseHandler
                 break;
         }
 
-        if (null === $item){
+        if (null === $item) {
             throw new InvalidArgumentException('Item does not exist');
         }
 
@@ -47,6 +50,16 @@ class CreatePurchaseHandler
         );
 
         $this->purchaseRepository->save($purchase);
+
+        if ($purchase->getPurchaseType()->isPart()) {
+            $this->messageBus->dispatch(
+                new IncreaseInventoryCommand(
+                    $command->getUser(),
+                    $purchase->getItemId(),
+                    $purchase->getQuantity()
+                )
+            );
+        }
 
         return $this->serializer->serialize(
             $purchase,

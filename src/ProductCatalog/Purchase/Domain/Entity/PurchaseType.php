@@ -11,4 +11,8 @@ enum PurchaseType: string
     public static function values(): array {
         return array_map(fn(PurchaseType $pt) => $pt->value, PurchaseType::cases());
     }
+
+    public function isPart(): bool {
+        return $this === self::PART;
+    }
 }

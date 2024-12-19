@@ -11,7 +11,7 @@ class PurchaseTypeEnumType extends Type
     const PURCHASE_TYPE_ENUM = 'purchase_type_enum';
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
-        return "ENUM('" . implode("','", PurchaseType::values()) . "')";
+        return 'purchase_type_enum';
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform): PurchaseType

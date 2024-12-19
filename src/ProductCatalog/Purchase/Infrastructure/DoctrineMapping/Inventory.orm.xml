@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                   https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\ProductCatalog\Purchase\Domain\Entity\Inventory" table="inventories">
+        <id name="id" type="guid" column="id" length="36">
+            <generator strategy="NONE" />
+        </id>
+
+        <field name="quantity" type="float" nullable="false" />
+        <many-to-one field="user" target-entity="App\Authorization\User\Domain\Entity\User" fetch="EXTRA_LAZY">
+            <join-column name="user_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
+        <one-to-one field="part" target-entity="App\ProductCatalog\Part\Domain\Entity\Part" fetch="EAGER">
+            <join-column name="part_id" referenced-column-name="id" nullable="true" />
+        </one-to-one>
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="prePersist" />
+            <lifecycle-callback type="preUpdate" method="preUpdate" />
+        </lifecycle-callbacks>
+    </entity>
+</doctrine-mapping>

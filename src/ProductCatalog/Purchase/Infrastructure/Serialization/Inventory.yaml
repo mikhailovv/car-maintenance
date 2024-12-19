@@ -1,0 +1,12 @@
+App\ProductCatalog\Purchase\Domain\Entity\Purchase:
+  attributes:
+    id:
+      groups: ['inventory_read']
+    itemId:
+      groups: ['inventory_read']
+    quantity:
+      groups: ['inventory_read']
+    createdAt:
+      groups: ['inventory_read']
+    updatedAt:
+      groups: ['inventory_read']
