@@ -74,7 +74,7 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "item_id": "0193da41-2b6c-72b5-a567-d40c887d89e6",
+  "item_id": "0193df1d-9184-73a4-ba30-0940bb6b543f",
   "item_type": "part",
   "quantity": 4,
   "unit_price": 23.34,

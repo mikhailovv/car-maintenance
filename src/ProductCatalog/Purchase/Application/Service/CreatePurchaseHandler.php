@@ -6,6 +6,7 @@ use App\ProductCatalog\Part\Domain\Repository\PartRepositoryInterface;
 use App\ProductCatalog\Purchase\Application\Model\CreatePurchaseCommand;
 use App\ProductCatalog\Purchase\Domain\Entity\Purchase;
 use App\ProductCatalog\Purchase\Domain\Entity\PurchaseType;
+use App\ProductCatalog\Purchase\Domain\Repository\PurchaseRepositoryInterface;
 use InvalidArgumentException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -14,6 +15,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class CreatePurchaseHandler
 {
     public function __construct(
+        private PurchaseRepositoryInterface $purchaseRepository,
         private PartRepositoryInterface     $partRepository,
         private SerializerInterface         $serializer
     )

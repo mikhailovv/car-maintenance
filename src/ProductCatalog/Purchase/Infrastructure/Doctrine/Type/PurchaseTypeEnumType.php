@@ -9,7 +9,7 @@ use Doctrine\DBAL\Types\Type;
 class PurchaseTypeEnumType extends Type
 {
     const PURCHASE_TYPE_ENUM = 'purchase_type_enum';
-    public function getSQLDeclaration(array $column, AbstractPlatform $platform)
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return "ENUM('" . implode("','", PurchaseType::values()) . "')";
     }
@@ -19,12 +19,12 @@ class PurchaseTypeEnumType extends Type
         return PurchaseType::from($value);
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): string
     {
-        return $value->getValue();
+        return $value->value;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return self::PURCHASE_TYPE_ENUM;
     }

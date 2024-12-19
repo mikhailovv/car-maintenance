@@ -21,6 +21,7 @@ framework:
             paths:
                 - '%kernel.project_dir%/src/ProductCatalog/Part/Infrastructure/Serialization'
                 - '%kernel.project_dir%/src/ProductCatalog/Car/Infrastructure/Serialization'
+                - '%kernel.project_dir%/src/ProductCatalog/Purchase/Infrastructure/Serialization'
 when@test:
     framework:
         test: true

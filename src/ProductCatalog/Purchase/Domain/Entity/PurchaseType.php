@@ -9,6 +9,6 @@ enum PurchaseType: string
     case OIL = 'oil';
 
     public static function values(): array {
-        return array_map(fn(PurchaseType $pt) => $pt->value(), PurchaseType::values());
+        return array_map(fn(PurchaseType $pt) => $pt->value, PurchaseType::cases());
     }
 }

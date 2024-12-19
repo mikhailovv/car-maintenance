@@ -1,0 +1,16 @@
+App\ProductCatalog\Purchase\Domain\Entity\Purchase:
+  attributes:
+    id:
+      groups: ['purchase_read']
+    purchaseType:
+      groups: ['purchase_read']
+    quantity:
+      groups: ['purchase_read']
+    unitPrice:
+      groups: ['purchase_read']
+      normalize: true
+      serialized_name: 'unit_price'
+    totalPrice:
+      groups: ['purchase_read']
+      normalize: true
+      serialized_name: 'total_price'
