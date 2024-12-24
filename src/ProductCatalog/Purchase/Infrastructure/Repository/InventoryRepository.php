@@ -20,7 +20,6 @@ class InventoryRepository extends ServiceEntityRepository implements InventoryRe
         return parent::find($id, $lockMode, $lockVersion);
     }
 
-
     public function save(Inventory $inventory): void
     {
         $this->getEntityManager()->persist($inventory);
@@ -36,6 +35,4 @@ class InventoryRepository extends ServiceEntityRepository implements InventoryRe
     {
        return $this->find(['userId' => $userId]);
     }
-
-
 }
