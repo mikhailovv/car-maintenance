@@ -2,6 +2,7 @@
 
 namespace App\ProductCatalog\Part\Infrastructure\Repository;
 
+use App\Authorization\User\Domain\Entity\User;
 use App\ProductCatalog\Part\Domain\Entity\Part;
 use App\ProductCatalog\Part\Domain\Repository\PartRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -20,32 +21,14 @@ class PartRepository extends ServiceEntityRepository implements PartRepositoryIn
         $this->getEntityManager()->flush();
     }
 
-    public function findPartsForUser(string $userId, ?int $categoryId = null): array
-    {
-        $query =  $this->createQueryBuilder('p')
-            ->where('p.user = :user')
-            ->orWhere('p.user is null')
-            ->setParameter('user', $userId);
-
-        if (null !== $categoryId) {
-            $query->andWhere('p.category = :category')
-                ->setParameter('category', $categoryId);
-        }
-
-        return $query
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findByIdAndUser(string $id, string $userId): ?Part
+    public function findByIds(User $user, array $ids): array
     {
         return $this->createQueryBuilder('p')
-            ->where('p.user = :user')
-            ->orWhere('p.user is null')
-            ->setParameter('user', $userId)
-            ->andWhere('p.id = :id')
-            ->setParameter('id', $id)
+            ->where('p.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->where('user_id = :user_id')
+            ->setParameter('user_id', $user->getId())
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getResult();
     }
 }

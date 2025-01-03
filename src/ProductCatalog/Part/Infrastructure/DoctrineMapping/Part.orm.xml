@@ -9,23 +9,33 @@
             <generator strategy="NONE" />
         </id>
 
-        <field name="brand" type="string" length="255" nullable="false" />
+        <field name="name" type="string" length="255" nullable="false" />
         <field name="partNumber" column="part_number" type="string" length="255" nullable="false" />
         <field name="originalPartNumber" column="original_part_number" type="string" length="255" nullable="false" />
-        <field name="name" type="string" length="255" nullable="false" />
+        <embedded name="unitPrice" class="Money\Money" column-prefix="unit_price_" />
+        <embedded name="totalPrice" class="Money\Money" column-prefix="total_price_" />
+        <field name="quantity" type="float" nullable="false" precision="2" />
+        <field name="status" type="string" length="100" />
         <field name="description" type="text" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime_immutable" nullable="false" />
 
+        <many-to-one field="car" target-entity="App\ProductCatalog\Car\Domain\Entity\Car" fetch="LAZY">
+            <join-column name="car_id" referenced-column-name="id" nullable="false" />
+        </many-to-one>
         <many-to-one field="category" target-entity="App\ProductCatalog\Part\Domain\Entity\Category" fetch="LAZY">
             <join-column name="category_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-
+        <many-to-one field="service" target-entity="App\ProductCatalog\Service\Domain\Entity\Service" fetch="LAZY">
+            <join-column name="service_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
         <many-to-one field="user" target-entity="App\Authorization\User\Domain\Entity\User" fetch="LAZY">
             <join-column name="user_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
         <field name="userId" type="guid" nullable="true" />
         <field name="categoryId" type="integer" nullable="false" />
+        <field name="carId" type="guid" nullable="true" />
+        <field name="serviceId" type="guid" nullable="true" />
 
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="prePersist" />
