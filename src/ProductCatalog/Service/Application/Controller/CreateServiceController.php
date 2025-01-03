@@ -1,9 +1,10 @@
 <?php
 
-namespace App\ProductCatalog\Car\Application\Controller;
+namespace App\ProductCatalog\Service\Application\Controller;
 
 use App\Authorization\User\Domain\Entity\User;
-use App\ProductCatalog\Car\Application\Model\CreateCarCommand;
+use App\ProductCatalog\Part\Application\Model\CreatePartCommand;
+use App\ProductCatalog\Service\Application\Model\CreateServiceCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,10 +13,12 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
-#[Route(path: '/api/cars', name: 'api_cars_post', methods: ['POST'])]
-class CreateCarController extends AbstractController
+
+#[Route(path: '/api/services', name: 'api_service_post', methods: ['POST'])]
+class CreateServiceController extends AbstractController
 {
     use HandleTrait;
+
     public function __construct(private MessageBusInterface $messageBus)
     {
     }
@@ -24,8 +27,8 @@ class CreateCarController extends AbstractController
     {
         $requestContent = json_decode($request->getContent(), true);
 
-        $car = $this->handle(new CreateCarCommand($requestContent, $user));
+        $service = $this->handle(new CreateServiceCommand($requestContent, $user));
 
-        return JsonResponse::fromJsonString($car, JsonResponse::HTTP_CREATED);
+        return JsonResponse::fromJsonString($service, JsonResponse::HTTP_CREATED);
     }
 }

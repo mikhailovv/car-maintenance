@@ -25,6 +25,9 @@ services:
         arguments: [ { datetime_format: "Y-m-d H:i:s" } ]
         tags: [ serializer.normalizer ]
 
+    App\Application\Serializer\MoneyNormalizer:
+        tags: [ serializer.normalizer ]
+
     App\ProductCatalog\Part\Infrastructure\Repository\CategoryRepository:
         tags: ['doctrine.repository_service']
 

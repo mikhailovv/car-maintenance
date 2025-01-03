@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\ProductCatalog\Service\Domain\Entity\Service" table="services">
+        <id name="id" type="guid" column="id" length="36">
+            <generator strategy="NONE" />
+        </id>
+
+        <field name="name" type="string" length="255" />
+        <embedded name="unitPrice" class="Money\Money" column-prefix="unit_price_" />
+        <embedded name="totalPrice" class="Money\Money" column-prefix="total_price_" />
+        <field name="quantity" type="float" />
+        <field name="shop" type="string" nullable="true" />
+        <field name="createdAt" type="datetime_immutable" />
+        <field name="updatedAt" type="datetime_immutable" />
+
+        <many-to-one field="user" target-entity="App\Authorization\User\Domain\Entity\User">
+            <join-column name="user_id" referenced-column-name="id" nullable="false" />
+        </many-to-one>
+
+        <one-to-many field="parts" target-entity="App\ProductCatalog\Part\Domain\Entity\Part" mapped-by="service" />
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="prePersist" />
+            <lifecycle-callback type="preUpdate" method="preUpdate" />
+        </lifecycle-callbacks>
+
+        <field name="userId" length="36" type="guid" column="user_id" nullable="false" />
+    </entity>
+
+</doctrine-mapping>

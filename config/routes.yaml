@@ -22,8 +22,8 @@ ApplicationControllers:
     namespace:  App\Application\Health\Application\Controller
   type: attribute
 
-PurchaseControllers:
+ServiceControllers:
   resource:
-    path: ../src/ProductCatalog/Purchase/Application/Controller
-    namespace:  App\ProductCatalog\Purchase\Application\Controller
+    path: ../src/ProductCatalog/Service/Application/Controller
+    namespace:  App\ProductCatalog\Service\Application\Controller
   type: attribute

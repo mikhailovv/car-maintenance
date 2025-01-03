@@ -1,0 +1,23 @@
+App\ProductCatalog\Service\Domain\Entity\Service:
+  attributes:
+    id:
+      groups: ['service_read']
+    name:
+      groups: ['service_read']
+    unitPrice:
+      groups: ['service_read']
+      serialized_name: 'unit_price'
+    quantity:
+      groups: ['service_read']
+    totalPrice:
+      groups: ['service_read']
+      serialized_name: 'total_price'
+    createdAt:
+      groups: ['service_read']
+      serialized_name: 'created_at'
+    updatedAt:
+      groups: ['service_read']
+      serialized_name: 'updated_at'
+    parts:
+      groups: ['service_read']
+      max_depth: 1

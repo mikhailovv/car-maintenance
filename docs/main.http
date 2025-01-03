@@ -29,11 +29,7 @@ Content-Type: application/json
 
 > {% client.global.set("auth_token", response.body.token); %}
 ### for mersedes owner user use: "mercedes-owner@admin.com:mercedes-owner"
-###
 
-GET http://localhost:8000/api/cars
-Content-Type: application/json
-Authorization: Bearer {{auth_token}}
 
 ####
 POST http://localhost:8000/api/cars
@@ -50,38 +46,27 @@ Authorization: Bearer {{auth_token}}
   "producedAt": "19.04.2023"
 }
 
-###
-GET http://localhost:8000/api/parts
-Content-Type: application/json
-Authorization: Bearer {{auth_token}}
-
-###
-POST http://localhost:8000/api/parts
+###  I want to create a new service
+POST http://localhost:8000/api/services
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "category_id": 99,
-  "brand": "TRW",
-  "part_number": "322323",
-  "original_part_number": "5555",
-  "name": "new part"
+    "name": "oil change",
+    "currency": "EUR",
+    "car_id": "0193ff10-eecf-72e3-836b-1a8f8cac19f7",
+    "unit_price": 23.34,
+    "quantity": 0.95
 }
-
 ###
-POST http://localhost:8000/api/purchase
+
+GET http://localhost:8000/api/cars
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
-
-{
-  "item_id": "0193df1d-9184-73a4-ba30-0940bb6b543f",
-  "item_type": "part",
-  "quantity": 4,
-  "unit_price": 23.34,
-  "currency": "EUR"
-}
-######
-
+##### I want to see exists services
+GET http://localhost:8000/api/services
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 ######
 Purchase
     id
@@ -92,29 +77,26 @@ Purchase
     shop
     created_at
 
-// purchases
-// 3 | part | TRW Brake pads | 15 | 20.0 | 12.12.2024
-// 4 | part |q TEXTAR Brakes  | 20 | 10.0 | 21.11.2023
-
-// inventory
-// | TRW Brake pads | 15
-// | TEXTAR Brakes  | 20
-
-// purchases
-// 5 | TRW Brake pads | 10 | 20.0 | 12.12.2024
-
-// inventory
-// | TRW Brake pads | 25
-// | TEXTAR Brakes  | 20
-
-// create service
-// id:10 | Brake service | 1 | 150.0 | 12.12.2023
-// service parts
-// service_id: 10 | TRW Brake pads | 1
-// service_id: 10 | TRW Brake lube | 1
 
 
+//
+// Car
+// -> buy part for car
+// -> buy service for car
+// -> link part with service
 
-// inventory
-// | TRW Brake pads | 24
-// | TEXTAR Brakes  | 20
+
+// Choose car
+//  -> add part
+//     -> part number, original part number, brand, name, category, price, currency, quantity, shop, created_at
+//  -> add service
+//     -> service name, price, currency, shop, created_at
+//     -> add part to service
+//        -> part number, original part number, brand, name, category, price, currency, quantity, shop, created_at
+//     -> choose existing part
+
+
+// Part   -> (add part) -> Part status = "stock"
+// Service -> (add part) -> Part status = "installed"
+// Service -> (choose existing part) -> Part status = "installed"
+
