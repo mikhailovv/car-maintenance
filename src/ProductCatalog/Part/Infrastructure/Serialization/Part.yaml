@@ -1,16 +1,16 @@
 App\ProductCatalog\Part\Domain\Entity\Part:
   attributes:
     id:
-      groups: ['part_read']
+      groups: ['part_read', 'service_with_parts_read']
     brand:
-      groups: ['part_read']
+      groups: ['part_read', 'service_with_parts_read']
     partNumber:
-      groups: ['part_read']
+      groups: ['part_read', 'service_with_parts_read']
     originalPartNumber:
-      groups: ['part_read']
+      groups: ['part_read', 'service_with_parts_read']
     name:
-      groups: ['part_read']
+      groups: ['part_read', 'service_with_parts_read']
     description:
-      groups: ['part_read']
+      groups: ['part_read', 'service_with_parts_read']
     createdAt:
-      groups: ['part_read']
+      groups: ['part_read', 'service_with_parts_read']

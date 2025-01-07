@@ -20,7 +20,7 @@ final class GetPartsHandler
     public function __invoke(GetPartsQuery $query): string
     {
         $parts = $this->partRepository->findPartsForUser(
-            $query->getUser()->getId(),
+            $query->getUser(),
             $query->getCategoryId()
         );
 

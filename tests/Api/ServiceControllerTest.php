@@ -2,6 +2,8 @@
 
 namespace App\Tests\Api;
 
+use App\ProductCatalog\Part\Infrastructure\Repository\PartRepository;
+
 class ServiceControllerTest extends ApiTestCase
 {
     protected function setUp(): void
@@ -47,5 +49,28 @@ class ServiceControllerTest extends ApiTestCase
         $this->arrayHasKey('name', $response[0]);
         $this->arrayHasKey('unit_price', $response[0]);
         $this->arrayHasKey('quantity', $response[0]);
+    }
+
+    public function testAddPartToService()
+    {
+        $user = $this->getLoggedUser();
+        $category = $this->createCategory('Filters', 'Air filters');
+        $airFilter = $this->createPart('Mahle air filter', $user, $category);
+        $salonFilter = $this->createPart('Mahle salon filter', $user, $category);
+        $service = $this->createService($user, 'Filters change');
+
+        $requestData = [
+            [
+                'part_id' => $airFilter->getId(),
+                'quantity' => 1
+            ],
+            [
+                'part_id' => $salonFilter->getId(),
+                'quantity' => 2
+            ]
+        ];
+
+        $response = $this->post("/api/services/{$service->getId()}/parts", $requestData);
+        $this->assertResponseStatusCodeSame(200);
     }
 }

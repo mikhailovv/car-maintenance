@@ -15,4 +15,5 @@ interface PartRepositoryInterface
     public function save(Part $part): void;
 
     public function findByIds(User $user, array $ids): array;
+    public function findPartsForUser(User $user, ?int $categoryId = null): array;
 }

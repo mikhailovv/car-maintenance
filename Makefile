@@ -19,6 +19,10 @@ create-fixtures:
 	docker-compose exec php /var/www/html/bin/console doctrine:migration:migrate
 	docker-compose exec php /var/www/html/bin/console doctrine:fixtures:load
 
+create-test-fixtures:
+	docker-compose exec php /var/www/html/bin/console doctrine:migration:migrate --env=test
+	docker-compose exec php /var/www/html/bin/console doctrine:fixtures:load --env=test
+
 information:
 	@echo "#############################################################################"
 	@echo "###                                                                       ###"

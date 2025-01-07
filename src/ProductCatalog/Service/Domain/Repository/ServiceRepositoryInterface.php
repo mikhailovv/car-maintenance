@@ -10,6 +10,7 @@ interface ServiceRepositoryInterface
 {
     public function findAll(): array;
 
+    /** @return Service|null */
     public function find(mixed $id, LockMode|int|null $lockMode = null, int|null $lockVersion = null): object|null;
 
     public function save(Service $service): void;

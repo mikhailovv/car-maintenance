@@ -26,8 +26,24 @@ class PartRepository extends ServiceEntityRepository implements PartRepositoryIn
         return $this->createQueryBuilder('p')
             ->where('p.id IN (:ids)')
             ->setParameter('ids', $ids)
-            ->where('user_id = :user_id')
-            ->setParameter('user_id', $user->getId())
+            ->andWhere('p.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findPartsForUser(User $user, ?int $categoryId = null): array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->setParameter('user', $user);
+
+        if ($categoryId){
+            $query->andWhere('p.category_id = :category_id')
+                ->setParameter('category_id', $categoryId);
+        }
+
+        return $query
             ->getQuery()
             ->getResult();
     }

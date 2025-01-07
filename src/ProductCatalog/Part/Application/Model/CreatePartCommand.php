@@ -3,6 +3,8 @@
 namespace App\ProductCatalog\Part\Application\Model;
 
 use App\Authorization\User\Domain\Entity\User;
+use Money\Currency;
+use Money\Money;
 
 class CreatePartCommand
 {
@@ -12,6 +14,8 @@ class CreatePartCommand
     private ?string $name = null;
     private ?string $description = null;
     private int $categoryId;
+    private Money $unitPrice;
+    private float $quantity;
     private User $user;
 
 
@@ -23,6 +27,8 @@ class CreatePartCommand
         $this->description = $partData['description'] ?? null;
         $this->originalPartNumber = $partData['original_part_number'] ?? null;
         $this->categoryId = $partData['category_id'];
+        $this->unitPrice = new Money($partData['unit_price'], new Currency($partData['currency']));
+        $this->quantity = $partData['quantity'];
         $this->user = $user;
     }
 
@@ -56,8 +62,19 @@ class CreatePartCommand
         return $this->categoryId;
     }
 
+    public function getUnitPrice(): Money
+    {
+        return $this->unitPrice;
+    }
+
+    public function getQuantity(): float
+    {
+        return $this->quantity;
+    }
+
     public function getUser(): User
     {
         return $this->user;
     }
+
 }

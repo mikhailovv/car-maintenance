@@ -32,10 +32,10 @@
             <join-column name="user_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
-        <field name="userId" type="guid" nullable="true" />
-        <field name="categoryId" type="integer" nullable="false" />
-        <field name="carId" type="guid" nullable="true" />
-        <field name="serviceId" type="guid" nullable="true" />
+        <field name="userId" type="guid" column="user_id" nullable="true" />
+        <field name="categoryId" type="integer" column="category_id" nullable="false" />
+        <field name="carId" type="guid" column="car_id" nullable="true" />
+        <field name="serviceId" type="guid" column="service_id" nullable="true" />
 
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="prePersist" />

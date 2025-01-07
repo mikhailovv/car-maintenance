@@ -31,7 +31,7 @@ Content-Type: application/json
 ### for mersedes owner user use: "mercedes-owner@admin.com:mercedes-owner"
 
 
-####
+#### I want to add a new car
 POST http://localhost:8000/api/cars
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
@@ -46,6 +46,11 @@ Authorization: Bearer {{auth_token}}
   "producedAt": "19.04.2023"
 }
 
+### I want to see all cars
+GET http://localhost:8000/api/cars
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
 ###  I want to create a new service
 POST http://localhost:8000/api/services
 Content-Type: application/json
@@ -54,20 +59,53 @@ Authorization: Bearer {{auth_token}}
 {
     "name": "oil change",
     "currency": "EUR",
-    "car_id": "0193ff10-eecf-72e3-836b-1a8f8cac19f7",
+    "car_id": "01944070-5e00-730f-a54c-140bed0077ca",
     "unit_price": 23.34,
     "quantity": 0.95
 }
-###
 
-GET http://localhost:8000/api/cars
-Content-Type: application/json
-Authorization: Bearer {{auth_token}}
 ##### I want to see exists services
 GET http://localhost:8000/api/services
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
-######
+
+#### I want to see part categories
+GET http://localhost:8000/api/parts/categories/
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+#### I want to add a new part
+POST http://localhost:8000/api/parts
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+    "part_number": "123456",
+    "original_part_number": "123456",
+    "brand": "bmw",
+    "name": "oil filter",
+    "category_id": 65,
+    "unit_price": 12.34,
+    "currency": "EUR",
+    "quantity": 1
+}
+#### I want to see exists parts
+GET http://localhost:8000/api/parts
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+
+###### I want to add parts to service
+POST http://localhost:8000/api/services/01944076-5930-71ee-a54a-72f59edb2ae8/parts
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+[{
+    "part_id": "01944077-577e-7140-9e02-52335b863ec7",
+    "quantity": 1
+}]
+####
+
 Purchase
     id
     item_type

@@ -2,6 +2,13 @@
 
 namespace App\Tests\Api;
 
+use App\Authorization\User\Domain\Entity\User;
+use App\ProductCatalog\Part\Domain\Entity\Category;
+use App\ProductCatalog\Part\Domain\Entity\Part;
+use App\ProductCatalog\Service\Domain\Entity\Service;
+use Doctrine\ORM\EntityManager;
+use Money\Currency;
+use Money\Money;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -13,8 +20,8 @@ class ApiTestCase extends WebTestCase
 {
     public $authToken;
     public static $apiClient;
-
     private static $needResetDatabase = true;
+    private EntityManager $entityManager;
 
     protected function setUp(): void
     {
@@ -27,6 +34,8 @@ class ApiTestCase extends WebTestCase
         //self::$needResetDatabase && $this->resetDatabaseSchema($kernel, $kernel->getEnvironment());
 
         self::$apiClient = $this->getApiClient($kernel);
+
+        $this->entityManager = self::getContainer()->get('doctrine')->getManager();
     }
 
     private function resetDatabaseSchema(KernelInterface $kernel, string $env): void
@@ -78,6 +87,7 @@ class ApiTestCase extends WebTestCase
 
     protected function login(): string
     {
+
         $this->post('/api/login', [
             'email' => 'bmw-owner@admin.com',
             'password' => 'bmw-owner',
@@ -124,4 +134,70 @@ class ApiTestCase extends WebTestCase
 
         return true;
     }
+
+    protected function createCategory(
+        string $mainCategoryName,
+        string $subCategoryName
+    ): Category
+    {
+        $category = new Category($mainCategoryName);
+        $this->entityManager->persist($category);
+        $subCategory = new Category($subCategoryName, $category);
+        $this->entityManager->persist($subCategory);
+
+        $this->entityManager->flush();
+
+        return $subCategory;
+    }
+
+    protected function createPart(
+        string $name,
+        User $user,
+        Category $category
+    ): Part
+    {
+        $partNumber = 'X-'. random_int(1000, 9999) . '-'. random_int(1000, 9999);
+        $part = new Part(
+            $category,
+            'Brand',
+            $partNumber,
+            $partNumber,
+            $name,
+            new Money(random_int(10, 1000), new Currency('EUR')),
+            random_int(1, 10),
+            $user
+        );
+
+        $this->entityManager->persist($part);
+        $this->entityManager->flush();
+
+        return $part;
+    }
+
+    protected function createService(User $user, string $name): Service
+    {
+        $service = new Service(
+            $user,
+            $name,
+            new Money(random_int(35, 90), new Currency('EUR')),
+            random_int(1, 10),
+        );
+
+        $this->entityManager->persist($service);
+        $this->entityManager->flush();
+
+        return $service;
+    }
+
+    protected function getLoggedUser(): User
+    {
+        return $this->entityManager->createQueryBuilder()
+            ->select('u')
+            ->from(User::class, 'u')
+            ->where('u.email = :email')
+            ->setParameter('email', 'bmw-owner@admin.com')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 }

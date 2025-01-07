@@ -1,9 +1,9 @@
 <?php
 
-namespace App\ProductCatalog\Part\Application\Controller;
+namespace App\ProductCatalog\Service\Application\Controller;
 
 use App\Authorization\User\Domain\Entity\User;
-use App\ProductCatalog\Part\Application\Model\CreatePartCommand;
+use App\ProductCatalog\Service\Application\Model\AddPartsToServiceCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,8 +12,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
-#[Route(path: '/api/parts', name: 'api_part_post', methods: ['POST'])]
-class CreatePartController extends AbstractController
+#[Route(path: '/api/services/{serviceId}/parts', name: 'api_add_parts_to_service_post', methods: ['POST'])]
+class AddPartsToServiceController extends AbstractController
 {
     use HandleTrait;
 
@@ -21,12 +21,13 @@ class CreatePartController extends AbstractController
     {
     }
 
-    public function __invoke(#[CurrentUser] User $user, Request $request): JsonResponse
+    public function __invoke(string $serviceId, #[CurrentUser] User $user, Request $request): JsonResponse
     {
         $requestContent = json_decode($request->getContent(), true);
 
-        $part = $this->handle(new CreatePartCommand($requestContent, $user));
+        $addedParts = $this->handle(new AddPartsToServiceCommand($serviceId, $requestContent, $user));
 
-        return JsonResponse::fromJsonString($part, JsonResponse::HTTP_CREATED);
+        return JsonResponse::fromJsonString($addedParts);
     }
+
 }

@@ -18,6 +18,9 @@ class ServiceRepository extends ServiceEntityRepository implements ServiceReposi
     public function save(Service $service): void
     {
         $this->getEntityManager()->persist($service);
+        foreach ($service->getParts() as $part){
+            $this->getEntityManager()->persist($part);
+        }
         $this->getEntityManager()->flush();
     }
 

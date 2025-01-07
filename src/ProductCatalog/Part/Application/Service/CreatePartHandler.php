@@ -41,6 +41,8 @@ class CreatePartHandler
             $command->getPartNumber(),
             $command->getOriginalPartNumber(),
             $name,
+            $command->getUnitPrice(),
+            $command->getQuantity(),
             $command->getUser(),
             $description,
         );

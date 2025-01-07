@@ -25,13 +25,23 @@ class Part
     private Category $category;
     private int $categoryId;
     private DateTimeImmutable $createdAt;
-    private ?User $user = null;
-    private ?string $userId = null;
+    private User $user;
+    private string $userId;
     private ?Service $service = null;
     private ?string $serviceId = null;
     private string $status = 'stock';
 
-    public function __construct(Category $category, string $brand, string $partNumber, string $originalPartNumber, string $name, ?User $user = null, ?string $description = null)
+    public function __construct(
+        Category $category,
+        string $brand,
+        string $partNumber,
+        string $originalPartNumber,
+        string $name,
+        Money $unitPrice,
+        float $quantity,
+        ?User $user = null,
+        ?string $description = null
+    )
     {
         $this->category = $category;
         $this->categoryId = $category->getId();
@@ -43,6 +53,10 @@ class Part
         $this->originalPartNumber = $originalPartNumber;
         $this->name = $name;
         $this->description = $description;
+
+        $this->unitPrice = $unitPrice;
+        $this->quantity = $quantity;
+        $this->totalPrice = $unitPrice->multiply($quantity);
     }
 
     public function setService(Service $service): void {
@@ -112,5 +126,45 @@ class Part
     public function getUserId(): ?string
     {
         return $this->user?->getId();
+    }
+
+    public function getUnitPrice(): Money
+    {
+        return $this->unitPrice;
+    }
+
+    public function getQuantity(): float
+    {
+        return $this->quantity;
+    }
+
+    public function getTotalPrice(): Money
+    {
+        return $this->totalPrice;
+    }
+
+    public function getCar(): ?Car
+    {
+        return $this->car;
+    }
+
+    public function getCarId(): ?string
+    {
+        return $this->carId;
+    }
+
+    public function getService(): ?Service
+    {
+        return $this->service;
+    }
+
+    public function getServiceId(): ?string
+    {
+        return $this->serviceId;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
     }
 }
