@@ -16,12 +16,18 @@
         <field name="shop" type="string" nullable="true" />
         <field name="createdAt" type="datetime_immutable" />
         <field name="updatedAt" type="datetime_immutable" />
+        <field name="mileage" type="integer" nullable="false" />
 
         <many-to-one field="user" target-entity="App\Authorization\User\Domain\Entity\User">
             <join-column name="user_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
+        <many-to-one field="car" target-entity="App\ProductCatalog\Car\Domain\Entity\Car">
+            <join-column name="car_id" referenced-column-name="id" nullable="false" />
+        </many-to-one>
+
         <one-to-many field="parts" target-entity="App\ProductCatalog\Part\Domain\Entity\Part" mapped-by="service" />
+
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="prePersist" />
             <lifecycle-callback type="preUpdate" method="preUpdate" />

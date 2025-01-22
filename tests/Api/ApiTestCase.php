@@ -3,6 +3,7 @@
 namespace App\Tests\Api;
 
 use App\Authorization\User\Domain\Entity\User;
+use App\ProductCatalog\Car\Domain\Entity\Car;
 use App\ProductCatalog\Part\Domain\Entity\Category;
 use App\ProductCatalog\Part\Domain\Entity\Part;
 use App\ProductCatalog\Service\Domain\Entity\Service;
@@ -172,14 +173,28 @@ class ApiTestCase extends WebTestCase
 
         return $part;
     }
+    protected function createCar(User $user): Car
+    {
+        $car = new Car('BMW X5', 'BMW', 'X5', $user);
+        $car->setProducedAt(new \DateTimeImmutable('2019-01-01'));
+        $car->setVin('1212121');
+        $car->setColor('Black');
+        $car->setRegistrationNumber('123444');
 
-    protected function createService(User $user, string $name): Service
+        $this->entityManager->persist($car);
+        $this->entityManager->flush();
+
+        return $car;
+    }
+    protected function createService(User $user, Car $car, string $name): Service
     {
         $service = new Service(
             $user,
+            $car,
             $name,
             new Money(random_int(35, 90), new Currency('EUR')),
             random_int(1, 10),
+            random_int(1, 100000)
         );
 
         $this->entityManager->persist($service);

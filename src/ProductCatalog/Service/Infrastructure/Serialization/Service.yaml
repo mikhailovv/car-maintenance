@@ -18,6 +18,8 @@ App\ProductCatalog\Service\Domain\Entity\Service:
     updatedAt:
       groups: ['service_read', 'service_with_parts_read']
       serialized_name: 'updated_at'
+    mileage:
+      groups: ['service_read', 'service_with_parts_read']
     parts:
       groups: ['service_read', 'service_with_parts_read']
       max_depth: 1

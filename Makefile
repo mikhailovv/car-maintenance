@@ -20,6 +20,8 @@ create-fixtures:
 	docker-compose exec php /var/www/html/bin/console doctrine:fixtures:load
 
 create-test-fixtures:
+	docker-compose exec php /var/www/html/bin/console  doctrine:schema:drop --force --env=test
+	docker-compose exec php /var/www/html/bin/console  doctrine:schema:create --env=test
 	docker-compose exec php /var/www/html/bin/console doctrine:migration:migrate --env=test
 	docker-compose exec php /var/www/html/bin/console doctrine:fixtures:load --env=test
 

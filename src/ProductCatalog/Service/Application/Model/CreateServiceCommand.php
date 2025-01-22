@@ -18,12 +18,16 @@ class CreateServiceCommand
     private Money $unitPrice;
     private float $quantity;
 
+    private int $mileage;
+
     public function __construct(array $serviceData, User $user)
     {
         $this->name = $serviceData['name'] ?? null;
         $this->description = $serviceData['description'] ?? null;
         $this->carId = $serviceData['car_id'] ?? null;
+        $this->mileage = $serviceData['mileage'] ?? 0;
         $this->user = $user;
+
 
         $unitPrice = $serviceData['unit_price'] ?? null;
         $currency = $serviceData['currency'] ?? null;
@@ -81,5 +85,10 @@ class CreateServiceCommand
     public function getPartIds(): array
     {
         return $this->partIds;
+    }
+
+    public function getMileage(): int
+    {
+        return $this->mileage;
     }
 }

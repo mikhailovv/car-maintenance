@@ -47,6 +47,7 @@ class CarFixtures  extends Fixture
         $vito->setVin('3456789');
         $vito->setColor('black');
         $vito->setRegistrationNumber('345 VIP');
+        $vito->setProducedAt(new CarbonImmutable('2020-01-01'));
 
         $manager->persist($vito);
 

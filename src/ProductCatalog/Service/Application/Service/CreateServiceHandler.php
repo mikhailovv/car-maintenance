@@ -2,6 +2,7 @@
 
 namespace App\ProductCatalog\Service\Application\Service;
 
+use App\ProductCatalog\Car\Domain\Repository\CarRepositoryInterface;
 use App\ProductCatalog\Part\Domain\Repository\PartRepositoryInterface;
 use App\ProductCatalog\Service\Application\Model\CreateServiceCommand;
 use App\ProductCatalog\Service\Domain\Entity\Service;
@@ -15,6 +16,7 @@ class CreateServiceHandler
     public function __construct(
         private ServiceRepositoryInterface $serviceRepository,
         private PartRepositoryInterface    $partRepository,
+        private CarRepositoryInterface      $carRepository,
         private SerializerInterface        $serializer
     )
     {
@@ -22,12 +24,19 @@ class CreateServiceHandler
 
     public function __invoke(CreateServiceCommand $command): string
     {
+        $car = $this->carRepository->find($command->getCarId());
+        if (!$car) {
+            throw new \InvalidArgumentException('Car not found');
+        }
+
         $service = new Service(
             $command->getUser(),
+            $car,
             name: $command->getName(),
             unitPrice: $command->getUnitPrice(),
             quantity: $command->getQuantity(),
-            shop: $command->getShop()
+            mileage: $command->getMileage(),
+            shop: $command->getShop(),
         );
 
         if ($command->getPartIds()) {

@@ -59,9 +59,10 @@ Authorization: Bearer {{auth_token}}
 {
     "name": "oil change",
     "currency": "EUR",
-    "car_id": "01944070-5e00-730f-a54c-140bed0077ca",
+    "car_id": "01948de3-d3fa-7127-ae1d-b61fa4a05d48",
     "unit_price": 23.34,
-    "quantity": 0.95
+    "quantity": 0.95,
+    "mileage": 10000
 }
 
 ##### I want to see exists services

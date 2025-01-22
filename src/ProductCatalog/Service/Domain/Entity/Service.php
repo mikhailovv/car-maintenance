@@ -3,6 +3,7 @@
 namespace App\ProductCatalog\Service\Domain\Entity;
 
 use App\Authorization\User\Domain\Entity\User;
+use App\ProductCatalog\Car\Domain\Entity\Car;
 use App\ProductCatalog\Part\Domain\Entity\Part;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -23,8 +24,11 @@ class Service
     private Collection $parts;
     private User $user;
     private string $userId;
+    private int $mileage;
+    private Car $car;
+    private string $carId;
 
-    public function __construct(User $user, string $name, Money $unitPrice, float $quantity, ?string $shop = null)
+    public function __construct(User $user, Car $car, string $name, Money $unitPrice, float $quantity, int $mileage, ?string $shop = null)
     {
         $this->user = $user;
         $this->userId = $user->getId();
@@ -34,6 +38,9 @@ class Service
         $this->totalPrice = $unitPrice->multiply($quantity);
         $this->shop = $shop;
         $this->parts = new ArrayCollection();
+        $this->mileage = $mileage;
+        $this->car = $car;
+        $this->carId = $car->getId();
     }
 
     public function addPart(Part $part): void
@@ -114,5 +121,20 @@ class Service
     public function getUserId(): string
     {
         return $this->userId;
+    }
+
+    public function getMileage(): int
+    {
+        return $this->mileage;
+    }
+
+    public function getCar(): Car
+    {
+        return $this->car;
+    }
+
+    public function getCarId(): string
+    {
+        return $this->carId;
     }
 }

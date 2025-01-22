@@ -20,7 +20,8 @@ class ServiceControllerTest extends ApiTestCase
             'currency' => 'EUR',
             'car_id' => $cars[0]['id'],
             'unit_price' => (float)23.34,
-            'quantity' => (float)0.95
+            'quantity' => (float)0.95,
+            'mileage' => $mileage = random_int(1000, 100000)
         ];
 
         $response = $this->post('/api/services', $requestData);
@@ -32,6 +33,7 @@ class ServiceControllerTest extends ApiTestCase
                 'currency' => 'EUR'
             ],
             'quantity' => '0.95',
+            'mileage' => $mileage,
             'total_price' => [
                 'amount' => '0',
                 'currency' => 'EUR'
@@ -57,7 +59,9 @@ class ServiceControllerTest extends ApiTestCase
         $category = $this->createCategory('Filters', 'Air filters');
         $airFilter = $this->createPart('Mahle air filter', $user, $category);
         $salonFilter = $this->createPart('Mahle salon filter', $user, $category);
-        $service = $this->createService($user, 'Filters change');
+
+        $car = $this->createCar($user);
+        $service = $this->createService($user, $car,'Filters change');
 
         $requestData = [
             [
