@@ -16,13 +16,28 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $id = Uuid::uuid7()->toString();
-        $email = 'admin@admin.com';
-        $user = new User($id, $email);
-        $password = $this->passwordHasher->hashPassword($user, 'admin');
+        $fixtureUsersData = [
+            'admin_user' => [
+                'email' => 'admin@admin.com',
+                'password' => 'admin',
+            ],
+            'bmw_owner' => [
+                'email' => 'bmw-owner@admin.com',
+                'password' => 'bmw-owner',
+            ],
+        ];
 
-        $user = new User($id, $email, $password);
-        $manager->persist($user);
+        foreach ($fixtureUsersData as $userReferenceKey => $userData){
+            $id = Uuid::uuid7()->toString();
+            $email = $userData['email'];
+            $user = new User($id, $email);
+            $password = $this->passwordHasher->hashPassword($user, $userData['password']);
+
+            $user = new User($id, $email, $password);
+            $manager->persist($user);
+
+            $this->setReference($userReferenceKey, $user);
+        }
 
         $manager->flush();
     }

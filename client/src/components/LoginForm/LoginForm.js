@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {useDispatch} from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import {login} from "../../feature/auth/authSlice";
+import {TextField, Button, Box, Typography, Container} from '@mui/material';
 
 const LoginForm = () => {
     const dispatch = useDispatch();
@@ -9,6 +10,7 @@ const LoginForm = () => {
     const [email, setEmail] = useState('bmw-owner@admin.com');
     const [password, setPassword] = useState('bmw-owner');
     const navigate = useNavigate();
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,38 +23,58 @@ const LoginForm = () => {
             body: JSON.stringify({ email, password }),
         });
         const data = await response.json();
+        let error = null;
 
         if (response.ok) {
             dispatch(login({user: data.user, token: data.token}))
             navigate('/cars');
         } else {
+            error = data.message
             alert(data.message || 'Login failed');
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Login</h2>
-            <div>
-                <label>Email:</label>
-                <input
+        <Container maxWidth="sm">
+            <Box
+                component="form"
+                onSubmit={handleSubmit}
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    mt: 4,
+                    p: 3,
+                    boxShadow: 3,
+                    borderRadius: 2,
+                    backgroundColor: 'white',
+                }}
+            >
+                <Typography variant="h4">Login</Typography>
+                {/*{error && <Alert severity="error">{error}</Alert>}*/}
+                <TextField
+                    label="Email"
+                    variant="outlined"
+                    fullWidth
                     type="email"
+                    margin="normal"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input
+                <TextField
+                    label="Password"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-            </div>
-            <button type="submit">Login</button>
-        </form>
+                <Button type="submit" variant="contained" color="primary" fullWidth  sx={{ mt: 2 }}>Login</Button>
+            </Box>
+        </Container>
     );
 };
 

@@ -10,7 +10,7 @@ class Category
 {
     private int $id;
     private string $name;
-    private int $parentCategoryId;
+    private ?int $parentCategoryId;
     private ?Category $parentCategory;
     private Collection $subCategories;
     private DateTimeImmutable $createdAt;
@@ -50,7 +50,7 @@ class Category
         $this->updatedAt = new DateTimeImmutable();
     }
 
-    public function getParentCategoryId(): string
+    public function getParentCategoryId(): ?int
     {
         return $this->parentCategoryId;
     }

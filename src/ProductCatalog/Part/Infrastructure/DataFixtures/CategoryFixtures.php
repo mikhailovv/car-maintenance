@@ -22,6 +22,8 @@ class CategoryFixtures extends Fixture
             foreach ($subCategoryNames as $categoryName) {
                 $subCategory = new Category($categoryName, $category);
                 $manager->persist($subCategory);
+
+                $this->addReference(str_replace(' ', '_', strtolower($categoryName)).'_category', $subCategory);
             }
         }
 

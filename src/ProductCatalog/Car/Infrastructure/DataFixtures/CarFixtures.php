@@ -20,8 +20,7 @@ class CarFixtures  extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-        $bmwOwner = new User(Uuid::uuid7()->toString(), 'bmw-owner@admin.com', $this->passwordHasher->hashPassword(new User('1', 'test@test.com'),  'bmw-owner'));
-        $manager->persist($bmwOwner);
+        $bmwOwner = $this->getReference('bmw_owner');
 
         $compact = new Car('My 325ti compact', 'BMW', '3-series', $bmwOwner);
         $compact->setVin('12345767812');

@@ -87,7 +87,6 @@ class ApiTestCase extends WebTestCase
 
     protected function login(): string
     {
-
         $this->post('/api/login', [
             'email' => 'bmw-owner@admin.com',
             'password' => 'bmw-owner',

@@ -33,6 +33,4 @@ class PartControllerTest extends ApiTestCase
 
         $this->assertResponseStatusCodeSame(201);
     }
-
-
 }
