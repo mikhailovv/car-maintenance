@@ -25,7 +25,7 @@ final class GetPartsController extends AbstractController
 
     public function __invoke(#[CurrentUser] User $user, Request $request): JsonResponse
     {
-        $parts = $this->handle(new GetPartsQuery($user, $request->get('category_id')));
+        $parts = $this->handle(new GetPartsQuery($user, $request->query->all()));
 
         return JsonResponse::fromJsonString($parts);
     }

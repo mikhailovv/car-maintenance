@@ -24,7 +24,7 @@ class GetServiceController extends AbstractController
 
     public function __invoke(#[CurrentUser] User $user, Request $request): JsonResponse
     {
-        $service = $this->handle(new GetServiceQuery($user));
+        $service = $this->handle(new GetServiceQuery($user, $request->query->all()));
 
         return JsonResponse::fromJsonString($service);
     }

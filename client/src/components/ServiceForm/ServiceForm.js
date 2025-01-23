@@ -7,7 +7,6 @@ import {
     Container,
     Alert,
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 import PartList from "../PartList/PartList";
 import {useParams} from "react-router-dom";
 
@@ -16,10 +15,11 @@ const ServiceForm = ({service, onSave}) => {
     const [name, setName] = useState('');
     const [unitPrice, setUnitPrice] = useState('');
     const [quantity, setQuantity] = useState('');
+    const [mileage, setMileage] = useState('');
+    const [shop, setShop] = useState('');
     const [error, setError] = useState(null);
 
     const [selectedParts, setSelectedParts] = useState([]);
-    const [newPartName, setNewPartName] = useState('');
 
     // Populate form fields when editing an existing service
     useEffect(() => {
@@ -47,6 +47,8 @@ const ServiceForm = ({service, onSave}) => {
             parts: selectedParts.map((part) => part.id),
             currency: 'EUR',
             car_id: id,
+            mileage,
+            shop
         };
 
         try {
@@ -110,8 +112,28 @@ const ServiceForm = ({service, onSave}) => {
                     onChange={(e) => setQuantity(e.target.value)}
                     required
                 />
+                <TextField
+                    label="Mileage"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    type="number"
+                    value={mileage}
+                    onChange={(e) => setMileage(e.target.value)}
+                    required
+                />
+                <TextField
+                    label="Shop"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    type="string"
+                    value={shop}
+                    onChange={(e) => setShop(e.target.value)}
+                    required
+                />
 
-                <PartList parts={selectedParts} setParts={setSelectedParts}/>
+                <PartList carId={id} parts={selectedParts} setParts={setSelectedParts}/>
 
                 <Button
                     type="submit"

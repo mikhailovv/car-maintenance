@@ -34,6 +34,7 @@
         </lifecycle-callbacks>
 
         <field name="userId" length="36" type="guid" column="user_id" nullable="false" />
+        <field name="carId" length="36" type="guid" column="car_id" nullable="false" />
     </entity>
 
 </doctrine-mapping>

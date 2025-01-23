@@ -59,14 +59,19 @@ Authorization: Bearer {{auth_token}}
 {
     "name": "oil change",
     "currency": "EUR",
-    "car_id": "01948de3-d3fa-7127-ae1d-b61fa4a05d48",
+    "car_id": "01948df9-8d86-73ce-bb49-779cde4d83c6",
     "unit_price": 23.34,
     "quantity": 0.95,
-    "mileage": 10000
+    "mileage": 18300
 }
 
 ##### I want to see exists services
-GET http://localhost:8000/api/services
+GET http://localhost:8000/api/services?car_id=01948df9-8d86-73ce-bb49-779cddd6924d
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+##### I want to see exists services
+GET http://localhost:8000/api/services?car_id=01948df9-8d86-73ce-bb49-779cde4d83c6
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 

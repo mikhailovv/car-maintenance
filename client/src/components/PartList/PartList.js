@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import api from '../../utils/api';
 
 
-const PartList = ({ parts, setParts }) => {
+const PartList = ({ carId, parts, setParts }) => {
     const [unusedParts, setUnusedParts] = useState([]);
 
     const [selectedPart, setSelectedPart] = useState(null);
@@ -12,7 +12,7 @@ const PartList = ({ parts, setParts }) => {
 
     useEffect(() => {
         setLoading(true);
-        api.get('/api/parts/')
+        api.get(`/api/parts/?car_id=${carId}`)
             .then((data) => setUnusedParts(data))
             .catch(err => console.error(err))
             .finally(() => setLoading(false));

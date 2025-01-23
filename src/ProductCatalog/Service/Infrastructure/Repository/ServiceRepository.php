@@ -3,6 +3,7 @@
 namespace App\ProductCatalog\Service\Infrastructure\Repository;
 
 use App\Authorization\User\Domain\Entity\User;
+use App\ProductCatalog\Car\Domain\Entity\Car;
 use App\ProductCatalog\Service\Domain\Entity\Service;
 use App\ProductCatalog\Service\Domain\Repository\ServiceRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -24,12 +25,19 @@ class ServiceRepository extends ServiceEntityRepository implements ServiceReposi
         $this->getEntityManager()->flush();
     }
 
-    public function findByUser(User $user): array
+    public function findByUser(User $user, ?Car $car = null): array
     {
-        return $this->createQueryBuilder('s')
+        $query = $this->createQueryBuilder('s')
             ->select('s')
             ->where('s.userId = :user')
-            ->setParameter('user', $user->getId())
+            ->setParameter('user', $user->getId());
+
+        if ($car !== null){
+            $query->andWhere('s.carId = :car')
+                ->setParameter('car', $car->getId());
+        }
+
+        return $query
             ->getQuery()
             ->getResult();
     }

@@ -3,6 +3,7 @@
 namespace App\ProductCatalog\Part\Domain\Repository;
 
 use App\Authorization\User\Domain\Entity\User;
+use App\ProductCatalog\Car\Domain\Entity\Car;
 use App\ProductCatalog\Part\Domain\Entity\Part;
 use Doctrine\DBAL\LockMode;
 
@@ -15,5 +16,5 @@ interface PartRepositoryInterface
     public function save(Part $part): void;
 
     public function findByIds(User $user, array $ids): array;
-    public function findPartsForUser(User $user, ?int $categoryId = null): array;
+    public function findPartsForUser(User $user, Car $car, ?int $categoryId = null): array;
 }

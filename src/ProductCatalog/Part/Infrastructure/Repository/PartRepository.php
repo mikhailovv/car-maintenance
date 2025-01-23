@@ -3,6 +3,7 @@
 namespace App\ProductCatalog\Part\Infrastructure\Repository;
 
 use App\Authorization\User\Domain\Entity\User;
+use App\ProductCatalog\Car\Domain\Entity\Car;
 use App\ProductCatalog\Part\Domain\Entity\Part;
 use App\ProductCatalog\Part\Domain\Repository\PartRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -32,7 +33,7 @@ class PartRepository extends ServiceEntityRepository implements PartRepositoryIn
             ->getResult();
     }
 
-    public function findPartsForUser(User $user, ?int $categoryId = null): array
+    public function findPartsForUser(User $user, ?Car $car=null, ?int $categoryId = null): array
     {
         $query = $this->createQueryBuilder('p')
             ->where('p.user = :user')
@@ -41,6 +42,11 @@ class PartRepository extends ServiceEntityRepository implements PartRepositoryIn
         if ($categoryId){
             $query->andWhere('p.category_id = :category_id')
                 ->setParameter('category_id', $categoryId);
+        }
+
+        if ($car){
+            $query->andWhere('p.car = :car')
+                ->setParameter('car', $car);
         }
 
         return $query
