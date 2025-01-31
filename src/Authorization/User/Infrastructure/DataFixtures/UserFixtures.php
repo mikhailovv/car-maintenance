@@ -20,20 +20,22 @@ class UserFixtures extends Fixture
             'admin_user' => [
                 'email' => 'admin@admin.com',
                 'password' => 'admin',
+                'name' => 'Admin',
             ],
             'bmw_owner' => [
                 'email' => 'bmw-owner@admin.com',
                 'password' => 'bmw-owner',
+                'name' => 'BMW Owner',
             ],
         ];
 
         foreach ($fixtureUsersData as $userReferenceKey => $userData){
             $id = Uuid::uuid7()->toString();
-            $email = $userData['email'];
-            $user = new User($id, $email);
+            $user = new User($id, $userData['email'], $userData['name']);
             $password = $this->passwordHasher->hashPassword($user, $userData['password']);
 
-            $user = new User($id, $email, $password);
+            $user = new User($id, $userData['email'], $userData['name'], $password);
+            $user->activate();
             $manager->persist($user);
 
             $this->setReference($userReferenceKey, $user);

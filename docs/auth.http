@@ -1,0 +1,13 @@
+POST http://localhost:8000/api/signup
+Content-Type: application/json
+
+{"email":  "vmikhailov2015@gmail.com", "password": "admin", "name": "Viacheslav"}
+#####
+
+
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{"email":  "vmikhailov2015@gmail.com", "password": "admin"}
+
+> {% client.global.set("auth_token", response.body.token); %}

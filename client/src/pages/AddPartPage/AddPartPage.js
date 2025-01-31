@@ -1,6 +1,7 @@
 import React from 'react';
 import PartForm from "../../components/PartForm/PartForm";
 import {useNavigate, useParams} from "react-router-dom";
+import api from "../../utils/api";
 
 const AddPartPage = () => {
     const navigate = useNavigate();
@@ -8,17 +9,15 @@ const AddPartPage = () => {
 
     const handleSave = async (newPart) => {
         try {
-            if (id !== '') {
-                navigate(`/cars/${id}/services/add`);
-            } else {
-                navigate('/cars')
-            }
+            api.post('/api/parts', {body: JSON.stringify( newPart)})
+                .then(() => navigate(`/cars/${id}`))
+
         } catch (error) {
             console.error('Failed to save part:', error);
         }
     }
 
-    return <PartForm onSave={handleSave}/>;
+    return <PartForm selectedCarId={id} onSave={handleSave} />;
 }
 
 export default AddPartPage;

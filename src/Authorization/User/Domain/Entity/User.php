@@ -13,20 +13,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     private string $id;
     private string $email;
+    private string $name;
     private string $password;
+    private UserStatus $status;
     private DateTimeImmutable $registeredAt;
     private DateTimeImmutable $updatedAt;
-
     private Collection $cars;
 
-    public function __construct(string $id, string $email, ?string $password=null)
+    public function __construct(string $id, string $email, string $name, ?string $password=null)
     {
         $this->id = $id;
         $this->email = $email;
+        $this->name = $name;
+
         if ($password !== null) {
             $this->password = $password;
         }
         $this->cars = new ArrayCollection();
+        $this->status = UserStatus::INACTIVE;
     }
 
     public function prePersist(): void
@@ -82,6 +86,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function activate(): void
+    {
+        $this->status = UserStatus::ACTIVE;
+    }
+
+    public function setPasswordHash(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
 }

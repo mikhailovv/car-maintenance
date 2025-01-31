@@ -6,7 +6,13 @@ Content-Type: application/json
 > {% client.global.set("auth_token", response.body.token); %}
 ####
 ####
+POST http://localhost:8000/api/signup
+Content-Type: application/json
 
+{"email":  "vmikhailov2015@gmail.com", "password": "admin", "name": "Viacheslav"}
+
+
+####
 GET http://localhost:8000/api/parts/categories/
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}

@@ -2,6 +2,8 @@
 
 namespace App\ProductCatalog\Part\Application\Service;
 
+use App\ProductCatalog\Car\Domain\Entity\Car;
+use App\ProductCatalog\Car\Domain\Repository\CarRepositoryInterface;
 use App\ProductCatalog\Part\Application\Model\CreatePartCommand;
 use App\ProductCatalog\Part\Domain\Entity\Part;
 use App\ProductCatalog\Part\Domain\Repository\CategoryRepositoryInterface;
@@ -16,6 +18,7 @@ class CreatePartHandler
     public function __construct(
         private CategoryRepositoryInterface $categoryRepository,
         private PartRepositoryInterface     $partRepository,
+        private CarRepositoryInterface      $carRepository,
         private SerializerInterface         $serializer
     )
     {
@@ -37,7 +40,6 @@ class CreatePartHandler
 
         $part = new Part(
             $category,
-            $command->getBrand(),
             $command->getPartNumber(),
             $command->getOriginalPartNumber(),
             $name,
@@ -46,6 +48,16 @@ class CreatePartHandler
             $command->getUser(),
             $description,
         );
+
+        if ($command->getCarId()){
+            /** @var Car $car */
+            $car = $this->carRepository->find($command->getCarId());
+            if (!$car) {
+                throw new \InvalidArgumentException('Car not found');
+            }
+
+            $part->setCar($car);
+        }
 
         $this->partRepository->save($part);
 

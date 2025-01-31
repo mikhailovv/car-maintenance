@@ -4,7 +4,6 @@ namespace App\ProductCatalog\Car\Infrastructure\DataFixtures;
 
 use App\Authorization\User\Domain\Entity\User;
 use App\ProductCatalog\Car\Domain\Entity\Car;
-use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -40,7 +39,15 @@ class CarFixtures  extends Fixture
         $manager->persist($touring);
 
 
-        $mbOwner = new User(Uuid::uuid7()->toString(), 'mercedes-owner@admin.com', $this->passwordHasher->hashPassword(new User('1', 'test@test.com'),  'mercedes-owner'));
+        $mbOwner = new User(
+            Uuid::uuid7()->toString(),
+            'mercedes-owner@admin.com',
+            'mercedes-owner',
+            $this->passwordHasher->hashPassword(
+                new User('1', 'test@test.com', 'mercedes-owner'),
+            'mercedes-owner'
+            )
+        );
         $manager->persist($mbOwner);
 
         $vito = new Car('Vito', 'Mercedes-Benz', 'Vito', $mbOwner);

@@ -97,6 +97,7 @@ const ServiceForm = ({service, onSave}) => {
                     variant="outlined"
                     fullWidth
                     margin="normal"
+                    type="number"
                     value={unitPrice}
                     onChange={(e) => setUnitPrice(e.target.value)}
                     required

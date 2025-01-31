@@ -10,6 +10,8 @@
         </id>
         <field name="email" column="email" length="255" />
         <field name="password" column="password" length="255"/>
+        <field name="name" column="name" length="255"/>
+        <field name="status" column="status" length="255"/>
         <field name="registeredAt" column="registered_at" type="datetime_immutable" />
         <field name="updatedAt" column="updated_at" type="datetime_immutable" />
 

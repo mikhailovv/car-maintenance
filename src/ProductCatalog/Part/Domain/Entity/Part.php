@@ -19,8 +19,8 @@ class Part
     private Money $unitPrice;
     private float $quantity;
     private Money $totalPrice;
-    private ?Car $car = null;
-    private ?string $carId = null;
+    private Car $car;
+    private string $carId;
     private ?string $description = null;
     private Category $category;
     private int $categoryId;
@@ -33,7 +33,6 @@ class Part
 
     public function __construct(
         Category $category,
-        string $brand,
         string $partNumber,
         string $originalPartNumber,
         string $name,

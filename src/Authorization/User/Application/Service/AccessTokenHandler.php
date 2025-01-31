@@ -6,8 +6,6 @@ use App\Authorization\User\Domain\Entity\AuthToken;
 use App\Authorization\User\Domain\Entity\Token;
 use App\Authorization\User\Domain\Repository\TokenRepositoryInterface;
 use App\Authorization\User\Infrastructure\Security\AuthTokenFactory;
-use App\Authorization\User\Infrastructure\Security\TokenGenerator;
-use Carbon\Carbon;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Http\AccessToken\AccessTokenHandlerInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
@@ -16,7 +14,7 @@ class AccessTokenHandler implements AccessTokenHandlerInterface
 {
     public function __construct(
         private TokenRepositoryInterface $authTokenRepository,
-    private AuthTokenFactory $authTokenFactory
+        private AuthTokenFactory $authTokenFactory
     )
     {
     }

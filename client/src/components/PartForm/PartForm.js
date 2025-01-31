@@ -1,16 +1,31 @@
 import React, {useEffect, useState} from 'react';
-import {TextField, Typography,  Container, Box, Alert, Button} from "@mui/material";
+import {
+    TextField,
+    Typography,
+    Container,
+    Box,
+    Alert,
+    Button,
+    Select,
+    FormControl,
+    MenuItem
+} from "@mui/material";
 import PartCategorySelect from "../PartCategorySelect/PartCategorySelect";
+import {useSelector} from "react-redux";
 
-const PartForm = ({ part, onSave }) => {
-
+const PartForm = ({ selectedCarId, part, onSave }) => {
+    const cars = useSelector(state => state.cars.carList);
+    console.log(selectedCarId);
     const [name, setName] = React.useState('');
     const [categoryId, setCategoryId] = React.useState('');
     const [serviceId, setServiceId] = React.useState('');
     const [partNumber, setPartNumber] = React.useState('');
+    const [originalPartNumber, setOriginalPartNumber] = React.useState('');
+    const [description, setDescription] = React.useState('');
     const [unitPrice, setUnitPrice] = React.useState(0);
     const [quantity, setQuantity] = React.useState(0);
     const [error, setError] = useState(null);
+    const [carId, setCarId] = useState(null);
 
     useEffect(() => {
         if (part){
@@ -20,6 +35,9 @@ const PartForm = ({ part, onSave }) => {
             setPartNumber(part.partNumber);
             setUnitPrice(part.unitPrice);
             setQuantity(part.quantity);
+        }
+        if (selectedCarId){
+            setCarId(selectedCarId);
         }
     }, [part])
 
@@ -33,12 +51,16 @@ const PartForm = ({ part, onSave }) => {
         }
 
         const newPart = {
+            category_id: categoryId,
+            service_id: serviceId,
+            car_id: carId,
             name,
-            categoryId,
-            serviceId,
-            partNumber,
-            unitPrice,
-            quantity
+            part_number: partNumber,
+            original_part_number: originalPartNumber,
+            quantity,
+            unit_price: unitPrice,
+            currency: 'EUR',
+            description
         }
 
         try {
@@ -46,6 +68,14 @@ const PartForm = ({ part, onSave }) => {
         } catch (err) {
             setError(err.message || 'Falied to save part')
         }
+    }
+
+    const handleCarChange = (event) => {
+        setCarId(event.target.value);
+    }
+
+    const handleCategoryChange = (event) => {
+        setCategoryId(event.target.value);
     }
 
     return (
@@ -66,6 +96,21 @@ const PartForm = ({ part, onSave }) => {
 
                 {error && <Alert severity="error">{error}</Alert>}
 
+                <FormControl fullWidth>
+                    <Select
+                        disabled={!!selectedCarId}
+                        labelId="select-label"
+                        value={carId}
+                        onChange={handleCarChange}
+                    >
+                        {
+                            cars.map(car => (<MenuItem key={car.id} value={car.id}>{car.name}</MenuItem>))
+                        }
+                    </Select>
+                </FormControl>
+
+                <PartCategorySelect selectedCategory={categoryId} onChangeHandler={handleCategoryChange}/>
+
                 <TextField
                     label="Part Name"
                     variant="outlined"
@@ -77,6 +122,26 @@ const PartForm = ({ part, onSave }) => {
                 />
 
                 <TextField
+                    label="Part number"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    value={partNumber}
+                    onChange={(e) => setPartNumber(e.target.value)}
+                    required
+                />
+
+                <TextField
+                    label="Original part number"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    value={originalPartNumber}
+                    onChange={(e) => setOriginalPartNumber(e.target.value)}
+                    required
+                />
+
+                <TextField
                     label="Unit price"
                     variant="outlined"
                     fullWidth
@@ -84,6 +149,7 @@ const PartForm = ({ part, onSave }) => {
                     value={unitPrice}
                     onChange={(e) => setUnitPrice(e.target.value)}
                     required
+                    type="number"
                 />
 
                 <TextField
@@ -97,7 +163,16 @@ const PartForm = ({ part, onSave }) => {
                     required
                 />
 
-                <PartCategorySelect value={categoryId} onChange={(e) => setCategoryId(e.target.value)}/>
+                <TextField
+                    label="Description"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                />
+
                 <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
                     Save Part
                 </Button>

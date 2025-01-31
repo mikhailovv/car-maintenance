@@ -20,7 +20,6 @@ class PartFixtures extends Fixture implements DependentFixtureInterface
 
         $brakeDiscPart = new Part(
             $brakeDiscCategory,
-            'ZIMMERMANN',
             '150.1288.52',
             '34111164539',
             'ZIMMERMANN',
@@ -33,7 +32,6 @@ class PartFixtures extends Fixture implements DependentFixtureInterface
 
         $brakePadPart = new Part(
             $brakePadCategory,
-            'EBC',
             'DP41211R',
             '1160356',
             'EBC yellow stuff',

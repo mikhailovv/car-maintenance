@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import api from '../../utils/api'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setCarList} from "../../feature/cars/carsSlice";
 import {Container, Typography} from "@mui/material";
@@ -8,7 +8,9 @@ import Grid from '@mui/material/Grid2';
 
 const CarList = () => {
     const dispatch = useDispatch();
+    const user = useSelector(state => state.auth.user);
     const cars = useSelector(state => state.cars.carList);
+    const navigator = useNavigate();
 
     useEffect(() =>{
         api.get('/api/cars').then(function(data){ console.log(data); dispatch(setCarList(data))}).catch(err => console.error(err));
@@ -18,9 +20,13 @@ const CarList = () => {
         return <p>No cars available.</p>;
     }
 
+    if (!user){
+        navigator('/login');
+    }
+
     return (
-        <Container maxWidth="sm">
-            <Typography variant="h4">Cars</Typography>
+        <Container sx={{mt: 2}}>
+            <Typography variant="h4">Your cars</Typography>
             <Grid container spacing={2}>
                 {cars.map(car => (
                     <Grid

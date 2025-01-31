@@ -27,3 +27,4 @@ ServiceControllers:
     path: ../src/ProductCatalog/Service/Application/Controller
     namespace:  App\ProductCatalog\Service\Application\Controller
   type: attribute
+

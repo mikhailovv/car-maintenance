@@ -8,7 +8,6 @@ use Money\Money;
 
 class CreatePartCommand
 {
-    private string $brand;
     private string $partNumber;
     private ?string $originalPartNumber = null;
     private ?string $name = null;
@@ -17,11 +16,10 @@ class CreatePartCommand
     private Money $unitPrice;
     private float $quantity;
     private User $user;
-
+    private string $carId;
 
     public function __construct(array $partData, User $user)
     {
-        $this->brand = $partData['brand'];
         $this->partNumber = $partData['part_number'];
         $this->name = $partData['name'] ?? null;
         $this->description = $partData['description'] ?? null;
@@ -29,12 +27,8 @@ class CreatePartCommand
         $this->categoryId = $partData['category_id'];
         $this->unitPrice = new Money($partData['unit_price'], new Currency($partData['currency']));
         $this->quantity = $partData['quantity'];
+        $this->carId = $partData['car_id'];
         $this->user = $user;
-    }
-
-    public function getBrand(): string
-    {
-        return $this->brand;
     }
 
     public function getPartNumber(): string
@@ -77,4 +71,8 @@ class CreatePartCommand
         return $this->user;
     }
 
+    public function getCarId(): string
+    {
+        return $this->carId;
+    }
 }

@@ -3,9 +3,8 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import api from "../../utils/api";
 
 
-const PartCategorySelect = () => {
+const PartCategorySelect = ({selectedCategory, onChangeHandler}) => {
     const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('');
 
     useEffect(() => {
         api.get('/api/parts/categories/')
@@ -13,16 +12,13 @@ const PartCategorySelect = () => {
             .catch(err => console.error(err));
     }, [])
 
-    const handleChange = (event) => {
-        setSelectedCategory(event.target.value)
-        console.log("Selected Category ID:", event.target.value);
-    }
 
     return (
-        <FormControl fullWidth>
-            <InputLabel>Select Category</InputLabel>
-            <Select value={selectedCategory || ""} onChange={handleChange}>
-                <MenuItem value="">Select Category</MenuItem>
+
+        <FormControl fullWidth sx={{mt:'16px'}}>
+            <InputLabel>Select category</InputLabel>
+            <Select value={selectedCategory || ""} onChange={onChangeHandler} >
+                <MenuItem value="">Select category</MenuItem>
                 {categories.flatMap((category) => [
                     <MenuItem key={`parent-${category.id}`} disabled>
                         {category.name}

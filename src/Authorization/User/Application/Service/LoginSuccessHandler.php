@@ -31,6 +31,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
             'user' => [
                 'id' => $user->getId(),
                 'email' => $user->getEmail(),
+                'name' => $user->getName(),
             ],
             'token' => $authToken->getToken()->getValue(), // Generate and return a token here (e.g., JWT)
         ]);
