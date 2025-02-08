@@ -8,6 +8,8 @@ App\ProductCatalog\Part\Domain\Entity\Part:
       groups: ['part_read', 'service_with_parts_read']
     originalPartNumber:
       groups: ['part_read', 'service_with_parts_read']
+    carId:
+      groups: ['part_read', 'service_with_parts_read']
     name:
       groups: ['part_read', 'service_with_parts_read']
     description:

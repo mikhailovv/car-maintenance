@@ -15,12 +15,12 @@ class MoneyNormalizer implements NormalizerInterface
         ];
     }
 
-    public function supportsNormalization($data, string $format = null, array $context = []): bool
+    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof Money;
     }
 
-    public function normalize($object, string $format = null, array $context = []): array
+    public function normalize($object, ?string $format = null, array $context = []): array
     {
         /** @var Money $object */
         return [
@@ -29,7 +29,7 @@ class MoneyNormalizer implements NormalizerInterface
         ];
     }
 
-    public function denormalize($data, string $type, string $format = null, array $context = []): mixed
+    public function denormalize($data, string $type, ?string $format = null, array $context = []): mixed
     {
         return new Money($data['amount'], new Currency($data['currency']));
     }

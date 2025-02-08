@@ -27,14 +27,23 @@ class AuthTokenFactory
             $expiredAt
         );
 
-        $token = JWT::encode($jwtTokenData->toArray(), $this->secret, 'HS256');
+        $token = JWT::encode(
+            payload: $jwtTokenData->toArray(),
+            key: $this->secret,
+            alg:'HS256'
+        );
 
         return new AuthToken($token, $user->getUserIdentifier(), $expiredAt);
     }
 
     public function createByToken(Token $token): AuthToken
     {
-        $tokenData = (array)JWT::decode($token->getValue(), new Key($this->secret, 'HS256'));
+        $header = null;
+        $tokenData = (array)JWT::decode(
+            jwt: $token->getValue(),
+            keyOrKeyArray: new Key($this->secret, 'HS256'),
+            headers: $headers
+        );
 
         $jwtTokenData = JwtTokenData::createFromArray($tokenData);
 

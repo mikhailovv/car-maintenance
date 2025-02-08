@@ -56,11 +56,12 @@ class ServiceControllerTest extends ApiTestCase
     public function testAddPartToService()
     {
         $user = $this->getLoggedUser();
-        $category = $this->createCategory('Filters', 'Air filters');
-        $airFilter = $this->createPart('Mahle air filter', $user, $category);
-        $salonFilter = $this->createPart('Mahle salon filter', $user, $category);
-
         $car = $this->createCar($user);
+        $category = $this->createCategory('Filters', 'Air filters');
+        $airFilter = $this->createPart('Mahle air filter', $user, $category, $car);
+        $salonFilter = $this->createPart('Mahle salon filter', $user, $category, $car);
+
+
         $service = $this->createService($user, $car,'Filters change');
 
         $requestData = [

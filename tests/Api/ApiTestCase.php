@@ -153,21 +153,22 @@ class ApiTestCase extends WebTestCase
     protected function createPart(
         string $name,
         User $user,
-        Category $category
+        Category $category,
+        Car $car,
     ): Part
     {
         $partNumber = 'X-'. random_int(1000, 9999) . '-'. random_int(1000, 9999);
         $part = new Part(
-            $category,
-            'Brand',
-            $partNumber,
-            $partNumber,
-            $name,
-            new Money(random_int(10, 1000), new Currency('EUR')),
-            random_int(1, 10),
-            $user
+            category: $category,
+            partNumber:$partNumber,
+            originalPartNumber: $partNumber,
+            name: $name,
+            unitPrice: new Money(random_int(10, 1000), new Currency('EUR')),
+            quantity: random_int(1, 10),
+            user: $user
         );
 
+        $part->setCar($car);
         $this->entityManager->persist($part);
         $this->entityManager->flush();
 

@@ -25,7 +25,7 @@ class CreatePartCommand
         $this->description = $partData['description'] ?? null;
         $this->originalPartNumber = $partData['original_part_number'] ?? null;
         $this->categoryId = $partData['category_id'];
-        $this->unitPrice = new Money($partData['unit_price'], new Currency($partData['currency']));
+        $this->unitPrice = new Money($partData['unit_price']['amount'], new Currency($partData['unit_price']['currency']));
         $this->quantity = $partData['quantity'];
         $this->carId = $partData['car_id'];
         $this->user = $user;

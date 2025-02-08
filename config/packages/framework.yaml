@@ -22,6 +22,7 @@ framework:
                 - '%kernel.project_dir%/src/ProductCatalog/Part/Infrastructure/Serialization'
                 - '%kernel.project_dir%/src/ProductCatalog/Service/Infrastructure/Serialization'
                 - '%kernel.project_dir%/src/ProductCatalog/Car/Infrastructure/Serialization'
+        name_converter: 'serializer.name_converter.camel_case_to_snake_case'
 when@test:
     framework:
         test: true
