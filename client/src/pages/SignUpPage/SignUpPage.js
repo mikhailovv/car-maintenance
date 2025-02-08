@@ -1,10 +1,10 @@
-import React from 'react'
-import SignUpForm from "../../components/SignUpForm/SignUpForm";
+import React from 'react';
+import SignUpForm from '../../components/SignUpForm/SignUpForm';
 
 const SignUpPage = () => {
-    return (
-        <SignUpForm/>
-    )
-}
+  return (
+    <SignUpForm />
+  );
+};
 
 export default SignUpPage;
