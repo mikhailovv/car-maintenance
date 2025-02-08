@@ -11,7 +11,7 @@
         <field name="name" column="name" length="255" />
         <field name="createdAt" column="created_at" type="datetime_immutable" />
         <field name="updatedAt" column="updated_at" type="datetime_immutable" />
-        <field name="parentCategoryId" column="parent_category_id" type="integer" />
+        <field name="parentCategoryId" column="parent_category_id" type="integer" nullable="true"/>
         <many-to-one field="parentCategory" target-entity="App\ProductCatalog\Part\Domain\Entity\Category" inversed-by="subCategories">
             <join-column name="parent_category_id" referenced-column-name="id" nullable="true"/>
         </many-to-one>

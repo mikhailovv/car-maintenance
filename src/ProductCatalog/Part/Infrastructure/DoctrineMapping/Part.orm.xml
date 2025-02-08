@@ -25,7 +25,7 @@
         <many-to-one field="category" target-entity="App\ProductCatalog\Part\Domain\Entity\Category" fetch="LAZY">
             <join-column name="category_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-        <many-to-one field="service" target-entity="App\ProductCatalog\Service\Domain\Entity\Service" fetch="LAZY">
+        <many-to-one field="service" target-entity="App\ProductCatalog\Service\Domain\Entity\Service" inversed-by="parts" fetch="LAZY">
             <join-column name="service_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
         <many-to-one field="user" target-entity="App\Authorization\User\Domain\Entity\User" fetch="LAZY">

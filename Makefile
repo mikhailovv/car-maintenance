@@ -1,4 +1,4 @@
-run: up composer-install create-fixtures information
+run: up composer-install create-fixtures create-test-fixtures information
 
 # Start the Docker Compose stack
 up:
@@ -20,9 +20,9 @@ create-fixtures:
 	docker-compose exec php /var/www/html/bin/console doctrine:fixtures:load
 
 create-test-fixtures:
-	docker-compose exec php /var/www/html/bin/console  doctrine:schema:drop --force --env=test
-	docker-compose exec php /var/www/html/bin/console  doctrine:schema:create --env=test
-	docker-compose exec php /var/www/html/bin/console doctrine:migration:migrate --env=test
+	docker-compose exec php /var/www/html/bin/console doctrine:database:drop --force --env=test
+	docker-compose exec php /var/www/html/bin/console doctrine:database:create --env=test
+	docker-compose exec php /var/www/html/bin/console doctrine:schema:create --env=test
 	docker-compose exec php /var/www/html/bin/console doctrine:fixtures:load --env=test
 
 information:
