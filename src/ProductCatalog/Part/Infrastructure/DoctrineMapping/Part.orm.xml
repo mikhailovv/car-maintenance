@@ -9,12 +9,12 @@
             <generator strategy="NONE" />
         </id>
 
-        <field name="name" type="string" length="255" nullable="false" />
-        <field name="partNumber" column="part_number" type="string" length="255" nullable="false" />
-        <field name="originalPartNumber" column="original_part_number" type="string" length="255" nullable="false" />
+        <field name="name" length="255" />
+        <field name="partNumber" column="part_number" type="string" length="255" />
+        <field name="originalPartNumber" column="original_part_number" type="string" length="255" />
         <embedded name="unitPrice" class="Money\Money" column-prefix="unit_price_" />
         <embedded name="totalPrice" class="Money\Money" column-prefix="total_price_" />
-        <field name="quantity" type="float" nullable="false" precision="2" />
+        <field name="quantity" type="float" precision="2" />
         <field name="status" type="string" length="100" />
         <field name="description" type="text" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime_immutable" nullable="false" />

@@ -19,7 +19,7 @@
         <field name="createdAt" column="created_at" type="datetime_immutable" />
         <field name="updatedAt" column="updated_at" type="datetime_immutable" />
 
-        <many-to-one field="user" target-entity="App\Authorization\User\Domain\Entity\User" inversed-by="cars" fetch="LAZY" >
+        <many-to-one field="user" target-entity="App\Authorization\User\Domain\Entity\User" inversed-by="cars" >
             <join-column name="user_id" referenced-column-name="id" nullable="false"/>
         </many-to-one>
         <lifecycle-callbacks>

@@ -17,7 +17,7 @@
         </many-to-one>
         <one-to-many field="subCategories" target-entity="App\ProductCatalog\Part\Domain\Entity\Category" mapped-by="parentCategory">
             <order-by>
-                <order-by-field name="name" direction="ASC"></order-by-field>
+                <order-by-field name="name" direction="ASC" />
             </order-by>
         </one-to-many>
         <lifecycle-callbacks>
